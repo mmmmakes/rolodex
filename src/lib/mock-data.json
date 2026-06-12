@@ -1,0 +1,896 @@
+{
+  "contacts": [
+    {
+      "id": "c001",
+      "name": "Jordan Mercer",
+      "date_added": "2024-01-15",
+      "birthday": "1988-03-22",
+      "last_updated": "2025-05-10",
+      "last_contacted": "2025-04-28",
+      "phone": "+1 (646) 555-0192",
+      "email": "jordan.mercer@outlook.com",
+      "website": "jordanmercer.co",
+      "linkedin": "linkedin.com/in/jordan-mercer",
+      "instagram": null,
+      "tags": ["New York", "venture capital", "fintech", "Columbia alumni"],
+      "updates": [
+        {
+          "id": "u001a",
+          "title": "Joined Andreessen Horowitz as Partner",
+          "summary": "Jordan was announced as a new General Partner at a16z, focusing on fintech and infrastructure investments. This is a significant step up from her previous Principal role at Spark Capital.",
+          "date": "2025-05-08",
+          "notes": "Great time to reconnect — send a congrats note. Could be relevant to Foresight's future fundraising conversations.",
+          "notes_date": "2025-05-10",
+          "sent_message": true,
+          "sent_message_date": "2025-05-10",
+          "new": false
+        },
+        {
+          "id": "u001b",
+          "title": "Published essay in Fortune on AI in financial services",
+          "summary": "Jordan co-authored a piece in Fortune outlining a framework for evaluating AI-native fintech startups. Heavy emphasis on data moats and proprietary datasets.",
+          "date": "2025-03-14",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        },
+        {
+          "id": "u001c",
+          "title": "Speaking at Money20/20 in October",
+          "summary": "Jordan is listed as a keynote speaker at Money20/20 Las Vegas this fall, on the topic of vertical AI and its impact on lending infrastructure.",
+          "date": "2025-05-01",
+          "notes": "Consider attending — good networking opportunity in the fintech space.",
+          "notes_date": "2025-05-03",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": true
+        }
+      ]
+    },
+    {
+      "id": "c002",
+      "name": "Tobias Wren",
+      "date_added": "2023-09-04",
+      "birthday": null,
+      "last_updated": "2025-04-20",
+      "last_contacted": "2025-02-11",
+      "phone": "+1 (312) 555-0847",
+      "email": "twren@stridecreative.com",
+      "website": "stridecreative.com",
+      "linkedin": "linkedin.com/in/tobiaswren",
+      "instagram": "@tobiaswren",
+      "tags": ["Chicago", "brand strategy", "CPG", "agency founder"],
+      "updates": [
+        {
+          "id": "u002a",
+          "title": "Stride Creative acquired by WPP",
+          "summary": "Tobias's independent brand strategy agency was acquired by WPP. He will remain as Managing Director for a two-year transition period. Agency retains its name.",
+          "date": "2025-04-18",
+          "notes": "Reach out — worth understanding how his independence changes and if he's looking for referrals or subcontracting.",
+          "notes_date": "2025-04-20",
+          "sent_message": true,
+          "sent_message_date": "2025-04-21",
+          "new": false
+        },
+        {
+          "id": "u002b",
+          "title": "Guest lecture at Northwestern Kellogg",
+          "summary": "Tobias led a session on brand architecture for early-stage CPG companies at Kellogg School of Management's marketing practicum.",
+          "date": "2025-01-30",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        }
+      ]
+    },
+    {
+      "id": "c003",
+      "name": "Priya Nair",
+      "date_added": "2024-06-20",
+      "birthday": "1991-11-05",
+      "last_updated": "2025-05-22",
+      "last_contacted": "2025-05-20",
+      "phone": "+1 (415) 555-0334",
+      "email": "priya@nairworks.io",
+      "website": "nairworks.io",
+      "linkedin": "linkedin.com/in/priyanair-product",
+      "instagram": "@priya.nairworks",
+      "tags": ["San Francisco", "product design", "healthtech", "YC alum"],
+      "updates": [
+        {
+          "id": "u003a",
+          "title": "Launched new health data visualization startup",
+          "summary": "Priya officially launched Luminal, a YC W25 company building patient-facing health data dashboards. Seed round of $2.1M announced.",
+          "date": "2025-05-20",
+          "notes": "Highly relevant to Foresight's data story. Explore potential collab or at minimum follow the product closely.",
+          "notes_date": "2025-05-21",
+          "sent_message": true,
+          "sent_message_date": "2025-05-20",
+          "new": false
+        },
+        {
+          "id": "u003b",
+          "title": "Featured in Fast Company's 'Most Creative People in Business'",
+          "summary": "Priya was named to Fast Company's annual list, recognized for her work building accessible health dashboards for underserved populations.",
+          "date": "2025-04-01",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": true,
+          "sent_message_date": "2025-04-03",
+          "new": false
+        },
+        {
+          "id": "u003c",
+          "title": "Hiring a Head of Growth",
+          "summary": "Luminal posted a Head of Growth role on LinkedIn. Strong equity package, remote-friendly. Likely scaling into Q3.",
+          "date": "2025-05-18",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": true
+        }
+      ]
+    },
+    {
+      "id": "c004",
+      "name": "Marcus Cole",
+      "date_added": "2022-11-30",
+      "birthday": "1979-07-14",
+      "last_updated": "2025-03-05",
+      "last_contacted": "2024-12-02",
+      "phone": null,
+      "email": "m.cole@parsonsdesign.edu",
+      "website": null,
+      "linkedin": "linkedin.com/in/marcuscole-design",
+      "instagram": "@marcus.cole.studio",
+      "tags": ["New York", "design education", "Parsons", "typography"],
+      "updates": [
+        {
+          "id": "u004a",
+          "title": "Named Chair of Communication Design at Parsons",
+          "summary": "Marcus was appointed Chair of the Communication Design department at Parsons School of Design, effective January 2025.",
+          "date": "2025-01-10",
+          "notes": "Good for mentorship angle — could be useful re: NYU Stern app or design/business crossover conversations.",
+          "notes_date": "2025-01-14",
+          "sent_message": true,
+          "sent_message_date": "2025-01-15",
+          "new": false
+        },
+        {
+          "id": "u004b",
+          "title": "Book on editorial typography released",
+          "summary": "Marcus published 'The Grid Beneath,' a book on editorial grid systems and modern typographic practice through Princeton Architectural Press.",
+          "date": "2025-03-01",
+          "notes": "Buy a copy — possible conversation starter.",
+          "notes_date": "2025-03-05",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        }
+      ]
+    },
+    {
+      "id": "c005",
+      "name": "Sasha Petrov",
+      "date_added": "2024-02-14",
+      "birthday": null,
+      "last_updated": "2025-05-01",
+      "last_contacted": "2025-04-15",
+      "phone": "+1 (929) 555-0761",
+      "email": "sasha@substackwritersco.com",
+      "website": null,
+      "linkedin": null,
+      "instagram": "@sashapetrov_writes",
+      "tags": ["Brooklyn", "independent media", "Substack", "cultural criticism"],
+      "updates": [
+        {
+          "id": "u005a",
+          "title": "Newsletter crossed 40K subscribers",
+          "summary": "Sasha's Substack 'Adjacent Fields' hit 40,000 subscribers, with approximately 8% paid conversion. One of the fastest-growing culture newsletters on the platform.",
+          "date": "2025-04-28",
+          "notes": "Ask about his monetization approach — relevant to your own Substack strategy.",
+          "notes_date": "2025-04-30",
+          "sent_message": true,
+          "sent_message_date": "2025-05-01",
+          "new": false
+        },
+        {
+          "id": "u005b",
+          "title": "Essay republished in The Atlantic",
+          "summary": "Sasha's piece on parasocial media consumption was syndicated and republished in The Atlantic's digital edition, significantly expanding his reach.",
+          "date": "2025-02-20",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        },
+        {
+          "id": "u005c",
+          "title": "Announced paid community launch",
+          "summary": "Sasha announced a paid community tier on Substack, offering monthly office hours and a peer writing group for paid subscribers at $15/month.",
+          "date": "2025-05-01",
+          "notes": "Consider joining to study the model.",
+          "notes_date": "2025-05-01",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": true
+        }
+      ]
+    },
+    {
+      "id": "c006",
+      "name": "Danielle Osei",
+      "date_added": "2023-05-09",
+      "birthday": "1985-02-28",
+      "last_updated": "2025-04-30",
+      "last_contacted": "2025-03-10",
+      "phone": "+1 (202) 555-0193",
+      "email": "dosei@healthpolicycenter.org",
+      "website": "healthpolicycenter.org",
+      "linkedin": "linkedin.com/in/danielleosei",
+      "instagram": null,
+      "tags": ["Washington DC", "health policy", "nonprofit", "integrative medicine advocacy"],
+      "updates": [
+        {
+          "id": "u006a",
+          "title": "Testified before Senate Health Committee",
+          "summary": "Danielle provided expert testimony before the Senate HELP Committee on coverage parity for integrative and chiropractic care under ACA-compliant plans.",
+          "date": "2025-04-22",
+          "notes": "Extremely relevant to Foresight's positioning. Follow up — her framing on cash-pay legitimacy is useful for content strategy.",
+          "notes_date": "2025-04-25",
+          "sent_message": true,
+          "sent_message_date": "2025-04-26",
+          "new": false
+        },
+        {
+          "id": "u006b",
+          "title": "Co-authored white paper on chiropractic outcomes data",
+          "summary": "Danielle contributed to a policy white paper outlining the need for standardized outcomes reporting in chiropractic care, including HRV and thermography metrics.",
+          "date": "2025-03-08",
+          "notes": "Send to Dr. Lavender — very aligned with the research collaboration angle.",
+          "notes_date": "2025-03-10",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        },
+        {
+          "id": "u006c",
+          "title": "Joined advisory board of Palmer College Foundation",
+          "summary": "Danielle was announced as a new member of the Palmer College of Chiropractic Foundation's advisory board, focused on research funding.",
+          "date": "2025-04-28",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": true
+        }
+      ]
+    },
+    {
+      "id": "c007",
+      "name": "Leo Huang",
+      "date_added": "2024-08-01",
+      "birthday": null,
+      "last_updated": "2025-05-15",
+      "last_contacted": "2025-05-12",
+      "phone": "+1 (650) 555-0029",
+      "email": "leo@aiscalestudio.com",
+      "website": "aiscalestudio.com",
+      "linkedin": "linkedin.com/in/leohuang-ai",
+      "instagram": null,
+      "tags": ["Palo Alto", "AI consulting", "enterprise software", "ex-OpenAI"],
+      "updates": [
+        {
+          "id": "u007a",
+          "title": "Left OpenAI, launched AI Scale Studio",
+          "summary": "Leo departed OpenAI's applied team and launched an independent AI solutions consultancy focused on mid-market enterprise clients. Full stack: strategy through implementation.",
+          "date": "2025-05-10",
+          "notes": "This is the referral partner opportunity. Follow up with a structured proposal for rev-share lead gen.",
+          "notes_date": "2025-05-12",
+          "sent_message": true,
+          "sent_message_date": "2025-05-12",
+          "new": false
+        },
+        {
+          "id": "u007b",
+          "title": "Podcast appearance: Latent Space on enterprise AI adoption",
+          "summary": "Leo was interviewed on the Latent Space podcast about barriers to AI adoption in non-tech companies, including healthcare and professional services.",
+          "date": "2025-04-05",
+          "notes": "Good episode — his framing on internal champions vs. top-down rollouts is useful.",
+          "notes_date": "2025-04-07",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        },
+        {
+          "id": "u007c",
+          "title": "Published pricing model framework for AI consulting",
+          "summary": "Leo shared a detailed post on LinkedIn outlining a value-based pricing model for AI consulting engagements, including rev-share and outcome-linked fee structures.",
+          "date": "2025-05-14",
+          "notes": "Relevant to structuring any formal referral deal.",
+          "notes_date": "2025-05-15",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": true
+        }
+      ]
+    },
+    {
+      "id": "c008",
+      "name": "Nina Calvo",
+      "date_added": "2023-03-17",
+      "birthday": "1993-09-09",
+      "last_updated": "2025-02-28",
+      "last_contacted": "2025-01-20",
+      "phone": null,
+      "email": "nina.calvo@gmail.com",
+      "website": null,
+      "linkedin": "linkedin.com/in/ninacalvo",
+      "instagram": "@ninacalvoceramics",
+      "tags": ["Brooklyn", "ceramics", "maker community", "retail"],
+      "updates": [
+        {
+          "id": "u008a",
+          "title": "Opened a studio storefront in Bed-Stuy",
+          "summary": "Nina opened a combined studio and retail space on Fulton Street in Bed-Stuy, selling her ceramic work and hosting beginner workshops on weekends.",
+          "date": "2025-02-15",
+          "notes": "Stop in — could be interesting for hosting a Studio AM client event.",
+          "notes_date": "2025-02-18",
+          "sent_message": true,
+          "sent_message_date": "2025-02-18",
+          "new": false
+        },
+        {
+          "id": "u008b",
+          "title": "Featured in NY Mag's 'The Goods'",
+          "summary": "Nina's ceramic mugs were featured in New York Magazine's gift guide section, citing their distinctive matte glaze and ergonomic form.",
+          "date": "2025-02-25",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        }
+      ]
+    },
+    {
+      "id": "c009",
+      "name": "Rashid Okonkwo",
+      "date_added": "2024-04-03",
+      "birthday": "1982-06-17",
+      "last_updated": "2025-05-19",
+      "last_contacted": "2025-05-05",
+      "phone": "+1 (713) 555-0882",
+      "email": "rashid@okonkwocapital.com",
+      "website": "okonkwocapital.com",
+      "linkedin": "linkedin.com/in/rashidokonkwo",
+      "instagram": null,
+      "tags": ["Houston", "private equity", "healthcare services", "board advisor"],
+      "updates": [
+        {
+          "id": "u009a",
+          "title": "Led $40M growth equity round in chiropractic DSO",
+          "summary": "Rashid's firm led a significant growth equity investment into ChiroPath Partners, a multi-state chiropractic DSO (dental service organization model). Signals continued PE interest in the chiro space.",
+          "date": "2025-05-15",
+          "notes": "Extremely relevant. Understand his thesis on cash-pay vs. insurance-dependent models. Could be useful for Foresight long-term positioning.",
+          "notes_date": "2025-05-17",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": true
+        },
+        {
+          "id": "u009b",
+          "title": "Speaking at HCIT Summit in Austin",
+          "summary": "Rashid is on the investor panel at the Healthcare IT Summit in Austin, discussing consolidation trends in musculoskeletal care.",
+          "date": "2025-04-10",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        },
+        {
+          "id": "u009c",
+          "title": "Published LinkedIn post on outcomes-based PE investing",
+          "summary": "Rashid wrote a well-received post arguing that PE firms investing in healthcare need to shift from volume-based to outcomes-based valuation metrics.",
+          "date": "2025-05-03",
+          "notes": "His framing maps directly onto the research angle at Foresight.",
+          "notes_date": "2025-05-05",
+          "sent_message": true,
+          "sent_message_date": "2025-05-05",
+          "new": false
+        }
+      ]
+    },
+    {
+      "id": "c010",
+      "name": "Claire Whitmore",
+      "date_added": "2023-11-22",
+      "birthday": null,
+      "last_updated": "2025-04-14",
+      "last_contacted": "2025-04-14",
+      "phone": "+1 (617) 555-0441",
+      "email": "cwhitmore@sternmba.nyu.edu",
+      "website": null,
+      "linkedin": "linkedin.com/in/claire-whitmore-stern",
+      "instagram": null,
+      "tags": ["New York", "NYU Stern", "MBA", "marketing strategy"],
+      "updates": [
+        {
+          "id": "u010a",
+          "title": "Accepted into NYU Stern MBA program (Class of 2027)",
+          "summary": "Claire announced her acceptance into the Stern MBA program with a Berkley Center fellowship. Will focus on brand management and media.",
+          "date": "2025-04-10",
+          "notes": "Ask about her application experience — very relevant. Scholarship context is useful too.",
+          "notes_date": "2025-04-12",
+          "sent_message": true,
+          "sent_message_date": "2025-04-14",
+          "new": false
+        },
+        {
+          "id": "u010b",
+          "title": "Published application essay advice on her blog",
+          "summary": "Claire shared her full Stern application experience including essay prompts, interview format, and tips for non-traditional applicants with creative backgrounds.",
+          "date": "2025-04-13",
+          "notes": "Read carefully — she has a BFA background similar to mine.",
+          "notes_date": "2025-04-14",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        }
+      ]
+    },
+    {
+      "id": "c011",
+      "name": "Ethan Voss",
+      "date_added": "2022-07-11",
+      "birthday": "1977-04-03",
+      "last_updated": "2025-03-30",
+      "last_contacted": "2025-01-08",
+      "phone": "+1 (503) 555-0317",
+      "email": "ethan@vossnarratives.com",
+      "website": "vossnarratives.com",
+      "linkedin": "linkedin.com/in/ethanvoss",
+      "instagram": "@ethanvoss.writes",
+      "tags": ["Portland", "documentary filmmaker", "brand storytelling", "editorial"],
+      "updates": [
+        {
+          "id": "u011a",
+          "title": "Documentary screened at SXSW",
+          "summary": "Ethan's documentary on the gig economy and identity premiered at SXSW 2025, receiving a Special Jury mention. Distribution talks reportedly underway.",
+          "date": "2025-03-12",
+          "notes": "Congrats message overdue.",
+          "notes_date": "2025-03-30",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        },
+        {
+          "id": "u011b",
+          "title": "Launched brand film production arm",
+          "summary": "Ethan announced a commercial arm of Voss Narratives offering brand documentary and long-form brand film services for mission-driven companies.",
+          "date": "2025-02-01",
+          "notes": "Potential creative collaborator for Foresight content or the wellness publication.",
+          "notes_date": "2025-02-05",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        }
+      ]
+    },
+    {
+      "id": "c012",
+      "name": "Amara Diallo",
+      "date_added": "2024-09-18",
+      "birthday": "1990-12-01",
+      "last_updated": "2025-05-25",
+      "last_contacted": "2025-05-22",
+      "phone": "+1 (404) 555-0675",
+      "email": "amara@amaradiallo.com",
+      "website": "amaradiallo.com",
+      "linkedin": "linkedin.com/in/amaradiallo",
+      "instagram": "@amaradiallo",
+      "tags": ["Atlanta", "wellness", "functional nutrition", "content creator"],
+      "updates": [
+        {
+          "id": "u012a",
+          "title": "Signed with talent agency for brand partnerships",
+          "summary": "Amara signed with Tidal Management for brand partnership representation, focusing on wellness, food, and functional health categories.",
+          "date": "2025-05-20",
+          "notes": "If Foresight or the wellness pub want influencer partnerships, Amara would be an excellent fit and a warm intro.",
+          "notes_date": "2025-05-22",
+          "sent_message": true,
+          "sent_message_date": "2025-05-22",
+          "new": false
+        },
+        {
+          "id": "u012b",
+          "title": "Launched 12-week nutrition program",
+          "summary": "Amara released a paid 12-week functional nutrition course with video modules, a recipe guide, and live Q&As. Reportedly sold out first cohort in 48 hours.",
+          "date": "2025-04-02",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        },
+        {
+          "id": "u012c",
+          "title": "Guest on The Proof podcast",
+          "summary": "Amara appeared on Simon Hill's 'The Proof' podcast discussing inflammation, nervous system regulation, and dietary interventions, reaching an audience heavily overlapping with chiropractic patients.",
+          "date": "2025-05-10",
+          "notes": "Good episode for understanding her positioning and audience overlap.",
+          "notes_date": "2025-05-12",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": true
+        }
+      ]
+    },
+    {
+      "id": "c013",
+      "name": "Derek Solano",
+      "date_added": "2023-08-25",
+      "birthday": null,
+      "last_updated": "2025-04-01",
+      "last_contacted": "2024-11-15",
+      "phone": null,
+      "email": "dsolano@webflowpartners.io",
+      "website": null,
+      "linkedin": "linkedin.com/in/dereksolano-webflow",
+      "instagram": null,
+      "tags": ["Miami", "Webflow", "web development", "agency"],
+      "updates": [
+        {
+          "id": "u013a",
+          "title": "Became Webflow Enterprise Partner",
+          "summary": "Derek's agency was elevated to Webflow Enterprise Partner status, gaining access to priority support and new CMS capabilities.",
+          "date": "2025-03-20",
+          "notes": "Good to know — reach out if Foresight site needs advanced Webflow work.",
+          "notes_date": "2025-03-22",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        },
+        {
+          "id": "u013b",
+          "title": "Released Webflow SEO audit template",
+          "summary": "Derek published a free Webflow SEO audit checklist on Notion, specifically for service-based businesses. Got significant traction in the Webflow community.",
+          "date": "2025-03-30",
+          "notes": "Use this for Foresight audit refresh.",
+          "notes_date": "2025-04-01",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        }
+      ]
+    },
+    {
+      "id": "c014",
+      "name": "Ingrid Halvorsen",
+      "date_added": "2024-01-29",
+      "birthday": "1986-08-19",
+      "last_updated": "2025-05-07",
+      "last_contacted": "2025-04-30",
+      "phone": "+1 (212) 555-0584",
+      "email": "ingrid@halvorsenstrategy.com",
+      "website": "halvorsenstrategy.com",
+      "linkedin": "linkedin.com/in/ingridhalvorsen",
+      "instagram": null,
+      "tags": ["New York", "brand consultant", "luxury", "strategy"],
+      "updates": [
+        {
+          "id": "u014a",
+          "title": "Joined faculty at SVA Design Thinking program",
+          "summary": "Ingrid was appointed adjunct faculty at SVA's Design for Social Innovation program, teaching brand systems for mission-driven organizations.",
+          "date": "2025-04-28",
+          "notes": "Interesting overlap — her luxury brand lens applied to mission-driven brands is exactly the territory I'm writing about.",
+          "notes_date": "2025-04-30",
+          "sent_message": true,
+          "sent_message_date": "2025-04-30",
+          "new": false
+        },
+        {
+          "id": "u014b",
+          "title": "Interview in Brand New publication",
+          "summary": "Ingrid was profiled in Brand New, discussing the tension between brand consistency and cultural adaptability in luxury service brands.",
+          "date": "2025-03-15",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        },
+        {
+          "id": "u014c",
+          "title": "Hosting private strategy workshop in May",
+          "summary": "Ingrid is hosting a small-group brand strategy workshop in New York, capped at 15 participants. Application-based. Focus: positioning frameworks for premium service businesses.",
+          "date": "2025-05-05",
+          "notes": "Consider applying if there's a future cohort.",
+          "notes_date": "2025-05-07",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": true
+        }
+      ]
+    },
+    {
+      "id": "c015",
+      "name": "Cam Reyes",
+      "date_added": "2023-06-14",
+      "birthday": null,
+      "last_updated": "2025-03-10",
+      "last_contacted": "2025-02-28",
+      "phone": "+1 (720) 555-0223",
+      "email": "cam@reyes.studio",
+      "website": "reyes.studio",
+      "linkedin": null,
+      "instagram": "@cam.reyes.studio",
+      "tags": ["Denver", "motion design", "visual identity", "freelance"],
+      "updates": [
+        {
+          "id": "u015a",
+          "title": "Rebranded and relaunched portfolio",
+          "summary": "Cam launched an entirely redesigned portfolio site with a focus on motion-forward brand identity work. New positioning: 'systems that move.'",
+          "date": "2025-03-05",
+          "notes": "Great work — could be a collaborator for animation on Foresight or the publication.",
+          "notes_date": "2025-03-08",
+          "sent_message": true,
+          "sent_message_date": "2025-03-08",
+          "new": false
+        },
+        {
+          "id": "u015b",
+          "title": "Won Gold at Communication Arts Interactive Awards",
+          "summary": "Cam's identity system for a Colorado-based outdoor gear brand won Gold in the Communication Arts Interactive Annual.",
+          "date": "2025-02-25",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        }
+      ]
+    },
+    {
+      "id": "c016",
+      "name": "Fatima El-Rashid",
+      "date_added": "2024-11-01",
+      "birthday": "1994-03-14",
+      "last_updated": "2025-05-28",
+      "last_contacted": "2025-05-25",
+      "phone": null,
+      "email": "fatima@layerbylayer.substack.com",
+      "website": "layerbylayer.substack.com",
+      "linkedin": "linkedin.com/in/fatimaelrashid",
+      "instagram": "@fatima.writes",
+      "tags": ["London", "brand strategy", "Substack", "consumer culture"],
+      "updates": [
+        {
+          "id": "u016a",
+          "title": "Published essay on Erewhon and aspirational health branding",
+          "summary": "Fatima published a widely shared essay analyzing Erewhon's brand strategy through the lens of community density and cultural coding. One of her most-engaged pieces to date.",
+          "date": "2025-05-22",
+          "notes": "Direct overlap with my Substack thesis. Read closely and note her argument structure before finalizing my own angle.",
+          "notes_date": "2025-05-24",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": true
+        },
+        {
+          "id": "u016b",
+          "title": "Speaking at the Substack Summit in NYC",
+          "summary": "Fatima is on a panel at the NYC Substack Summit in June, discussing brand strategy as a content niche and building a paid readership.",
+          "date": "2025-05-10",
+          "notes": "Attend if possible — introduce myself in person.",
+          "notes_date": "2025-05-12",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        },
+        {
+          "id": "u016c",
+          "title": "Crossed 15K subscribers on Layer by Layer",
+          "summary": "Fatima's newsletter hit 15,000 subscribers with a 12% paid conversion rate, above Substack's average for the category.",
+          "date": "2025-04-30",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        },
+        {
+          "id": "u016d",
+          "title": "Announced a brand strategy course for writers",
+          "summary": "Fatima is launching a self-paced course on applying brand thinking to newsletter businesses, targeted at independent writers with 1K+ subscribers.",
+          "date": "2025-05-26",
+          "notes": "Evaluate once it launches — could be useful or competitive context.",
+          "notes_date": "2025-05-28",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": true
+        }
+      ]
+    },
+    {
+      "id": "c017",
+      "name": "Nora Lindqvist",
+      "date_added": "2023-10-05",
+      "birthday": "1989-05-30",
+      "last_updated": "2025-04-22",
+      "last_contacted": "2025-04-08",
+      "phone": "+1 (646) 555-0839",
+      "email": "nora@nordichouseinteriors.com",
+      "website": "nordichouseinteriors.com",
+      "linkedin": "linkedin.com/in/noralindqvist-interiors",
+      "instagram": "@nordichouse.interiors",
+      "tags": ["New York", "interior design", "residential", "Scandinavian"],
+      "updates": [
+        {
+          "id": "u017a",
+          "title": "Project featured in Architectural Digest",
+          "summary": "Nora's renovation of a Tribeca loft was featured in Architectural Digest online, highlighting her approach to layering natural materials with functional minimalism.",
+          "date": "2025-04-18",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": true,
+          "sent_message_date": "2025-04-20",
+          "new": false
+        },
+        {
+          "id": "u017b",
+          "title": "Expanding to commercial interiors",
+          "summary": "Nora announced on Instagram that Nordic House is expanding into boutique commercial projects, starting with wellness spaces and specialty retail.",
+          "date": "2025-04-20",
+          "notes": "Could be a fit for future Foresight office redesign or a wellness publication brand environment.",
+          "notes_date": "2025-04-22",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        }
+      ]
+    },
+    {
+      "id": "c018",
+      "name": "Omar Baptiste",
+      "date_added": "2024-03-12",
+      "birthday": null,
+      "last_updated": "2025-05-02",
+      "last_contacted": "2025-03-20",
+      "phone": "+1 (646) 555-0103",
+      "email": "omar@baptiste-pr.com",
+      "website": "baptiste-pr.com",
+      "linkedin": "linkedin.com/in/omarbaptiste",
+      "instagram": "@omarbaptiste",
+      "tags": ["New York", "public relations", "wellness brands", "media relations"],
+      "updates": [
+        {
+          "id": "u018a",
+          "title": "Placed client in NYT Well section",
+          "summary": "Omar secured a feature placement for a functional medicine client in the NYT Well section, including a practitioner Q&A and patient story.",
+          "date": "2025-04-25",
+          "notes": "Omar is consistently landing top-tier wellness placements. Worth a serious conversation about Foresight or Dr. Lavender's PR.",
+          "notes_date": "2025-04-28",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": true
+        },
+        {
+          "id": "u018b",
+          "title": "Launched wellness PR consulting offer",
+          "summary": "Omar is now offering a smaller-scale consulting package for independent practitioners who don't need full-service retainer PR but want strategic media guidance.",
+          "date": "2025-04-10",
+          "notes": "The consulting tier may be the right entry point for Foresight.",
+          "notes_date": "2025-04-12",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        },
+        {
+          "id": "u018c",
+          "title": "Guest on 'The Wellness Business Podcast'",
+          "summary": "Omar appeared on a podcast discussing how independent wellness practitioners can build media credibility without a big budget, with specific tactics for earned media.",
+          "date": "2025-03-18",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        }
+      ]
+    },
+    {
+      "id": "c019",
+      "name": "Simone Hartley",
+      "date_added": "2022-05-03",
+      "birthday": "1983-10-22",
+      "last_updated": "2025-01-20",
+      "last_contacted": "2024-09-15",
+      "phone": null,
+      "email": "simone.hartley@gmail.com",
+      "website": null,
+      "linkedin": "linkedin.com/in/simonehartley-ops",
+      "instagram": null,
+      "tags": ["Phoenix", "operations", "startup", "fractional COO"],
+      "updates": [
+        {
+          "id": "u019a",
+          "title": "Launched fractional COO practice for agencies",
+          "summary": "Simone formally launched a fractional COO practice specifically targeting creative agencies and boutique consultancies in the $500K–$2M revenue range.",
+          "date": "2025-01-12",
+          "notes": "Worth exploring for Studio AM as it scales. She knows the agency operating model well.",
+          "notes_date": "2025-01-15",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        },
+        {
+          "id": "u019b",
+          "title": "Published 'Agency Ops Playbook' on Gumroad",
+          "summary": "Simone released a 90-page operations guide for small agencies, covering SOPs, client onboarding, contractor management, and financial modeling.",
+          "date": "2025-01-18",
+          "notes": "Download this.",
+          "notes_date": "2025-01-20",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        }
+      ]
+    },
+    {
+      "id": "c020",
+      "name": "James Okafor",
+      "date_added": "2024-07-08",
+      "birthday": "1981-01-27",
+      "last_updated": "2025-05-20",
+      "last_contacted": "2025-05-18",
+      "phone": "+1 (480) 555-0562",
+      "email": "james@gilbertbizalliance.org",
+      "website": "gilbertbizalliance.org",
+      "linkedin": "linkedin.com/in/jamesokafor-gilbert",
+      "instagram": null,
+      "tags": ["Gilbert AZ", "local business development", "chamber of commerce", "community"],
+      "updates": [
+        {
+          "id": "u020a",
+          "title": "Launched Gilbert small business spotlight series",
+          "summary": "James initiated a monthly spotlight campaign featuring long-standing Gilbert businesses, including a social media series, press releases, and community awards.",
+          "date": "2025-05-14",
+          "notes": "Nominate Foresight — 26 years in Gilbert is a compelling story. Good local visibility play.",
+          "notes_date": "2025-05-16",
+          "sent_message": true,
+          "sent_message_date": "2025-05-18",
+          "new": false
+        },
+        {
+          "id": "u020b",
+          "title": "Organized Gilbert Wellness Week 2025",
+          "summary": "James is organizing a community Wellness Week event in Gilbert this fall, with booth participation open to local health and wellness businesses.",
+          "date": "2025-04-30",
+          "notes": "Get Foresight registered as a participant — excellent local SEO and community signal.",
+          "notes_date": "2025-05-02",
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": false
+        },
+        {
+          "id": "u020c",
+          "title": "Featured in Arizona Republic on Gilbert growth story",
+          "summary": "James was quoted in an Arizona Republic piece on Gilbert's business community, emphasizing the role of health and wellness businesses in the city's economic profile.",
+          "date": "2025-05-18",
+          "notes": null,
+          "notes_date": null,
+          "sent_message": false,
+          "sent_message_date": null,
+          "new": true
+        }
+      ]
+    }
+  ]
+}
