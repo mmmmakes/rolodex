@@ -89,11 +89,11 @@ export default function Home() {
   const handleAddContact = (contact: Contact) =>
     setContacts(cs => [contact, ...cs])
 
-  const handleMarkRead = (contactId: string, updateId: string) =>
+  const handleMarkAllRead = (contactId: string) =>
     setContacts(cs =>
       cs.map(c =>
         c.id === contactId
-          ? { ...c, updates: c.updates.map(u => u.id === updateId ? { ...u, new: false } : u) }
+          ? { ...c, updates: c.updates.map(u => ({ ...u, new: false })) }
           : c
       )
     )
@@ -199,7 +199,7 @@ export default function Home() {
         <DetailPanel
           contact={selectedContact}
           onUpdateContact={handleUpdateContact}
-          onMarkRead={handleMarkRead}
+          onMarkAllRead={handleMarkAllRead}
         />
       </div>
 

@@ -1,29 +1,31 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Contact, Update } from '@/lib/types'
-import { formatDate, formatDateShort } from '@/lib/utils'
+import { formatDateShort } from '@/lib/utils'
 import { Tag } from './Tag'
 import { ExternalLink } from 'lucide-react'
 
 interface Props {
   contact: Contact | null
   onUpdateContact: (id: string) => Promise<void>
-  onMarkRead: (contactId: string, updateId: string) => void
+  onMarkAllRead: (contactId: string) => void
 }
 
-function UpdateCard({ update, contactId, onMarkRead }: { update: Update; contactId: string; onMarkRead: (cid: string, uid: string) => void }) {
+function UpdateCard({ update }: { update: Update }) {
   return (
-    <div className={`bg-[var(--card)] border-[1.5px] border-[var(--ink)] rounded-[17px] px-[13px] pt-[9px] pb-[20px] relative ${update.new ? 'border-[var(--gold)]' : ''}`}>
-      {update.new && (
-        <span className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />
-      )}
+    <div className={`bg-[var(--card)] border-[1.5px] rounded-[17px] px-[13px] pt-[9px] pb-[20px] ${update.new ? 'border-[var(--gold)]' : 'border-[var(--ink)]'}`}>
 
-      {/* Title + date */}
+      {/* Title + dot + date */}
       <div className="flex items-baseline justify-between gap-2 mb-1.5">
-        <span className="font-semibold uppercase text-[13.6px] tracking-[0.03em] leading-tight flex-1 min-w-0 pr-4">
-          {update.title}
-        </span>
+        <div className="flex items-center gap-1.5 min-w-0 flex-1 pr-2">
+          <span className="font-semibold uppercase text-[13.6px] tracking-[0.03em] leading-tight truncate">
+            {update.title}
+          </span>
+          {update.new && (
+            <span className="shrink-0 w-1.5 h-1.5 rounded-full bg-[var(--gold)] translate-y-[-1px]" />
+          )}
+        </div>
         <span className="text-[9px] text-[var(--muted)] uppercase tracking-[0.05em] shrink-0 whitespace-nowrap">
           {formatDateShort(update.date)}
         </span>
@@ -67,22 +69,20 @@ function UpdateCard({ update, contactId, onMarkRead }: { update: Update; contact
             <span className="text-[var(--gold)]">✓</span> Message sent {formatDateShort(update.sent_message_date)}
           </p>
         )}
-
-        {update.new && (
-          <button
-            onClick={() => onMarkRead(contactId, update.id)}
-            className="mt-1.5 text-[9px] uppercase tracking-[0.06em] text-[var(--muted)] underline underline-offset-2 hover:text-[var(--ink)] transition-colors"
-          >
-            Mark read
-          </button>
-        )}
       </div>
     </div>
   )
 }
 
-export function DetailPanel({ contact, onUpdateContact, onMarkRead }: Props) {
+export function DetailPanel({ contact, onUpdateContact, onMarkAllRead }: Props) {
   const [updating, setUpdating] = useState(false)
+
+  // Auto-mark all updates as read when contact is viewed
+  useEffect(() => {
+    if (contact && contact.updates.some(u => u.new)) {
+      onMarkAllRead(contact.id)
+    }
+  }, [contact?.id])
 
   if (!contact) {
     return (
@@ -105,9 +105,7 @@ export function DetailPanel({ contact, onUpdateContact, onMarkRead }: Props) {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
 
-  const summary = contact.updates.length > 0
-    ? sortedUpdates[0].summary
-    : null
+  const summary = sortedUpdates.length > 0 ? sortedUpdates[0].summary : null
 
   return (
     <div className="h-full flex flex-col overflow-hidden">
@@ -142,32 +140,20 @@ export function DetailPanel({ contact, onUpdateContact, onMarkRead }: Props) {
         {/* Links */}
         <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px]">
           {contact.linkedin && (
-            <a
-              href={`https://${contact.linkedin.replace(/^https?:\/\//, '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-0.5 text-[var(--ink)] underline underline-offset-2 hover:text-[var(--gold)] transition-colors font-medium"
-            >
+            <a href={`https://${contact.linkedin.replace(/^https?:\/\//, '')}`} target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-0.5 text-[var(--ink)] underline underline-offset-2 hover:text-[var(--gold)] transition-colors font-medium">
               LinkedIn <ExternalLink size={9} />
             </a>
           )}
           {contact.website && (
-            <a
-              href={`https://${contact.website.replace(/^https?:\/\//, '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-0.5 text-[var(--ink)] underline underline-offset-2 hover:text-[var(--gold)] transition-colors font-medium"
-            >
+            <a href={`https://${contact.website.replace(/^https?:\/\//, '')}`} target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-0.5 text-[var(--ink)] underline underline-offset-2 hover:text-[var(--gold)] transition-colors font-medium">
               Website <ExternalLink size={9} />
             </a>
           )}
           {contact.instagram && (
-            <a
-              href={`https://instagram.com/${contact.instagram.replace('@', '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-0.5 text-[var(--ink)] underline underline-offset-2 hover:text-[var(--gold)] transition-colors font-medium"
-            >
+            <a href={`https://instagram.com/${contact.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-0.5 text-[var(--ink)] underline underline-offset-2 hover:text-[var(--gold)] transition-colors font-medium">
               {contact.instagram} <ExternalLink size={9} />
             </a>
           )}
@@ -195,14 +181,6 @@ export function DetailPanel({ contact, onUpdateContact, onMarkRead }: Props) {
         <button className="text-[9px] uppercase tracking-[0.07em] bg-[var(--gold)] text-[var(--ink)] px-3 py-1 rounded-full border border-[var(--ink)] font-medium hover:scale-[0.96] active:scale-[0.93] transition-transform whitespace-nowrap">
           Add an Update +
         </button>
-        {contact.updates.some(u => u.new) && (
-          <button
-            onClick={() => contact.updates.filter(u => u.new).forEach(u => onMarkRead(contact.id, u.id))}
-            className="ml-auto text-[9px] uppercase tracking-[0.06em] text-[var(--muted)] underline underline-offset-2 hover:text-[var(--ink)] transition-colors"
-          >
-            Mark all read
-          </button>
-        )}
       </div>
 
       {/* Update cards */}
@@ -211,7 +189,7 @@ export function DetailPanel({ contact, onUpdateContact, onMarkRead }: Props) {
           <p className="text-[11px] text-[var(--muted)] uppercase tracking-[0.07em]">No updates yet. Click AI Update + to fetch.</p>
         ) : (
           sortedUpdates.map(update => (
-            <UpdateCard key={update.id} update={update} contactId={contact.id} onMarkRead={onMarkRead} />
+            <UpdateCard key={update.id} update={update} />
           ))
         )}
       </div>
