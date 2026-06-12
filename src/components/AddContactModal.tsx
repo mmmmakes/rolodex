@@ -121,7 +121,7 @@ export function AddContactModal({ onClose, onAdd }: Props) {
                   onClick={handleAIPull}
                   disabled={pulling || !urlPull}
                   className={`shrink-0 bg-[var(--gold)] text-[var(--ink)] text-[10px] font-medium uppercase tracking-[0.05em] px-3 py-1 rounded-full border border-[var(--ink)] transition-opacity whitespace-nowrap ${
-                    urlPull && !pulling ? 'opacity-100 hover:opacity-80' : 'opacity-40'
+                    urlPull && !pulling ? 'hover:scale-[0.96] active:scale-[0.93] transition-transform' : 'opacity-40 pointer-events-none'
                   }`}
                 >
                   {pulling ? '...' : 'AI Pull +'}
@@ -245,7 +245,7 @@ export function AddContactModal({ onClose, onAdd }: Props) {
                 ) : (
                   <button
                     onClick={() => setShowTagInput(true)}
-                    className="text-[9px] px-2.5 py-1 rounded-full border border-dashed border-[var(--ink)] uppercase tracking-[0.05em] font-medium text-[var(--ink)] opacity-50 hover:opacity-100 transition-opacity"
+                    className="text-[9px] px-2.5 py-1 rounded-full border border-dashed border-[var(--ink)] uppercase tracking-[0.05em] font-medium text-[var(--ink)] hover:scale-[0.96] active:scale-[0.93] transition-transform"
                   >
                     Create tag +
                   </button>
@@ -262,12 +262,12 @@ export function AddContactModal({ onClose, onAdd }: Props) {
             onClick={handleSubmit}
             disabled={!canAdd}
             className={`bg-[var(--gold)] text-[var(--ink)] text-[10px] font-medium uppercase tracking-[0.06em] px-4 py-1.5 rounded-full border border-[var(--ink)] transition-opacity ${
-              canAdd ? 'opacity-100 hover:opacity-80' : 'opacity-40 cursor-default'
+              canAdd ? 'hover:scale-[0.96] active:scale-[0.93] transition-transform' : 'opacity-40 pointer-events-none'
             }`}
           >
             Add Contact +
           </button>
-          <button onClick={onClose} className="text-[var(--ink)] opacity-60 hover:opacity-100 transition-opacity">
+          <button onClick={onClose} className="text-[var(--ink)] hover:scale-[0.96] active:scale-[0.93] transition-transform">
             <X size={18} strokeWidth={2} />
           </button>
         </div>

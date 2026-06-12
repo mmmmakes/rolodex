@@ -38,11 +38,11 @@ function UpdateCard({ update, contactId, onMarkRead }: { update: Update; contact
       <div className="border-t border-[var(--card-dark)] pt-2 mt-1">
         <div className="flex items-center gap-2 mb-1">
           <span className="text-[9px] uppercase tracking-[0.08em] text-[var(--muted)] font-medium">Notes</span>
-          <button className="text-[9px] uppercase tracking-[0.06em] bg-[var(--gold)] text-[var(--ink)] px-2 py-0.5 rounded-full border border-[var(--ink)] font-medium opacity-70 hover:opacity-100 transition-opacity">
+          <button className="text-[9px] uppercase tracking-[0.06em] bg-[var(--gold)] text-[var(--ink)] px-2 py-0.5 rounded-full border border-[var(--ink)] font-medium hover:scale-[0.96] active:scale-[0.93] transition-transform">
             Add a note +
           </button>
           {!update.sent_message && (
-            <button className="text-[9px] uppercase tracking-[0.06em] bg-[var(--gold)] text-[var(--ink)] px-2 py-0.5 rounded-full border border-[var(--ink)] font-medium opacity-70 hover:opacity-100 transition-opacity">
+            <button className="text-[9px] uppercase tracking-[0.06em] bg-[var(--gold)] text-[var(--ink)] px-2 py-0.5 rounded-full border border-[var(--ink)] font-medium hover:scale-[0.96] active:scale-[0.93] transition-transform">
               Sent a message
             </button>
           )}
@@ -188,11 +188,11 @@ export function DetailPanel({ contact, onUpdateContact, onMarkRead }: Props) {
         <button
           onClick={handleUpdate}
           disabled={updating}
-          className="text-[9px] uppercase tracking-[0.07em] bg-[var(--gold)] text-[var(--ink)] px-3 py-1 rounded-full border border-[var(--ink)] font-medium opacity-70 hover:opacity-100 disabled:opacity-30 transition-opacity whitespace-nowrap"
+          className="text-[9px] uppercase tracking-[0.07em] bg-[var(--gold)] text-[var(--ink)] px-3 py-1 rounded-full border border-[var(--ink)] font-medium hover:scale-[0.96] active:scale-[0.93] disabled:opacity-40 disabled:pointer-events-none transition-transform whitespace-nowrap"
         >
           {updating ? 'Updating...' : 'AI Update +'}
         </button>
-        <button className="text-[9px] uppercase tracking-[0.07em] bg-[var(--gold)] text-[var(--ink)] px-3 py-1 rounded-full border border-[var(--ink)] font-medium opacity-70 hover:opacity-100 transition-opacity whitespace-nowrap">
+        <button className="text-[9px] uppercase tracking-[0.07em] bg-[var(--gold)] text-[var(--ink)] px-3 py-1 rounded-full border border-[var(--ink)] font-medium hover:scale-[0.96] active:scale-[0.93] transition-transform whitespace-nowrap">
           Add an Update +
         </button>
         {contact.updates.some(u => u.new) && (

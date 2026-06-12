@@ -95,13 +95,13 @@ export function MiniCalendar({ startDate, endDate, onChange, onClose }: Props) {
     >
       {/* Month header */}
       <div className="flex items-center justify-between mb-2">
-        <button onClick={prevMonth} className="w-4 h-4 flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity">
+        <button onClick={prevMonth} className="w-4 h-4 flex items-center justify-center hover:scale-[0.96] active:scale-[0.93] transition-transform">
           <ChevronLeft size={11} strokeWidth={2.5} />
         </button>
         <span className="text-[10px] font-medium uppercase tracking-[-0.25px]">
           {MONTHS[viewMonth]} {viewYear}
         </span>
-        <button onClick={nextMonth} className="w-4 h-4 flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity">
+        <button onClick={nextMonth} className="w-4 h-4 flex items-center justify-center hover:scale-[0.96] active:scale-[0.93] transition-transform">
           <ChevronRight size={11} strokeWidth={2.5} />
         </button>
       </div>
@@ -157,7 +157,7 @@ export function MiniCalendar({ startDate, endDate, onChange, onClose }: Props) {
         {(startDate || endDate) && (
           <button
             onClick={() => onChange(null, null)}
-            className="text-[8px] uppercase opacity-50 hover:opacity-100 underline underline-offset-1 transition-opacity"
+            className="text-[8px] uppercase opacity-50 underline underline-offset-1 hover:scale-[0.96] transition-transform"
           >
             Clear
           </button>

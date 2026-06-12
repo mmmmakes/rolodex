@@ -19,7 +19,7 @@ export function RolodexCard({ contact, total, index, onPrev, onNext }: Props) {
       <div className="flex flex-col justify-center pr-2">
         <button
           onClick={onPrev}
-          className="flex flex-col items-center gap-1 opacity-40 hover:opacity-80 transition-opacity py-6"
+          className="flex flex-col items-center gap-1 hover:scale-[0.96] active:scale-[0.93] transition-transform py-6"
           aria-label="Previous contact"
         >
           <div className="w-px bg-[var(--ink)] h-12" />
@@ -73,7 +73,7 @@ export function RolodexCard({ contact, total, index, onPrev, onNext }: Props) {
       <div className="flex flex-col justify-center pl-2">
         <button
           onClick={onNext}
-          className="flex flex-col items-center gap-1 opacity-40 hover:opacity-80 transition-opacity py-6"
+          className="flex flex-col items-center gap-1 hover:scale-[0.96] active:scale-[0.93] transition-transform py-6"
           aria-label="Next contact"
         >
           <svg width="9" height="6" viewBox="0 0 9 6" fill="none">

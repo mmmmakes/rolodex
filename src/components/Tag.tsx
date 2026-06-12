@@ -15,7 +15,7 @@ export function Tag({ label, active, onClick, size = 'sm' }: TagProps) {
   return (
     <button
       onClick={onClick}
-      className={`${base} transition-colors ${
+      className={`${base} transition-all hover:scale-[0.96] active:scale-[0.93] ${
         active
           ? 'bg-[var(--ink)] text-[var(--card)]'
           : 'bg-[var(--card)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--card)]'

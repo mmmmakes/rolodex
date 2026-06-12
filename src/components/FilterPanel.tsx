@@ -55,7 +55,7 @@ export function FilterPanel({
       <div className="flex justify-end">
         <button
           onClick={onAddContact}
-          className="bg-[var(--gold)] text-[var(--ink)] font-semibold uppercase text-[11px] tracking-[0.05em] px-5 py-2 rounded-full border border-[var(--ink)] transition-opacity hover:opacity-80 whitespace-nowrap"
+          className="bg-[var(--gold)] text-[var(--ink)] font-semibold uppercase text-[11px] tracking-[0.05em] px-5 py-2 rounded-full border border-[var(--ink)] hover:scale-[0.96] active:scale-[0.93] transition-transform whitespace-nowrap"
         >
           Add Contact +
         </button>
@@ -79,7 +79,7 @@ export function FilterPanel({
         {hasAnyFilter && (
           <button
             onClick={onClearAll}
-            className="text-[10px] font-medium uppercase tracking-[0.06em] underline underline-offset-2 hover:opacity-60 transition-opacity"
+            className="text-[10px] font-medium uppercase tracking-[0.06em] underline underline-offset-2 hover:scale-[0.96] transition-transform"
           >
             Clear
           </button>
@@ -92,7 +92,7 @@ export function FilterPanel({
           <div key={field} className="relative">
             <button
               onClick={() => setOpenCalendar(openCalendar === field ? null : field)}
-              className={`flex items-center gap-1 text-[10px] px-[10px] py-[4px] rounded-full border border-[var(--ink)] uppercase tracking-[0.04em] font-medium whitespace-nowrap leading-none transition-colors ${
+              className={`flex items-center gap-1 text-[10px] px-[10px] py-[4px] rounded-full border border-[var(--ink)] uppercase tracking-[0.04em] font-medium whitespace-nowrap leading-none transition-all hover:scale-[0.96] active:scale-[0.93] ${
                 isActive(field)
                   ? 'bg-[var(--ink)] text-[var(--card)]'
                   : 'bg-[var(--card)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--card)]'
