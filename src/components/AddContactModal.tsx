@@ -19,7 +19,7 @@ const MAX_TAGS = 10
 
 export function AddContactModal({ onClose, onAdd }: Props) {
   const [form, setForm] = useState({
-    name: '', phone: '', email: '', birthday: '',
+    firstName: '', lastName: '', phone: '', email: '', birthday: '',
     linkedin: '', website: '', instagram: '', summary: '',
   })
   const [selectedTags, setSelectedTags] = useState<string[]>([])
@@ -46,7 +46,11 @@ export function AddContactModal({ onClose, onAdd }: Props) {
       })
       const data = await res.json()
       if (data.contact) {
-        setForm(f => ({ ...f, ...data.contact }))
+        const { name, ...rest } = data.contact
+        const parts = (name || '').split(' ')
+        const firstName = parts[0] || ''
+        const lastName = parts.slice(1).join(' ')
+        setForm(f => ({ ...f, ...rest, firstName, lastName }))
         if (data.contact.tags) setSelectedTags(data.contact.tags.slice(0, MAX_TAGS))
       }
     } catch (e) {
@@ -56,13 +60,16 @@ export function AddContactModal({ onClose, onAdd }: Props) {
     }
   }
 
+  const fullName = [form.firstName, form.lastName].filter(Boolean).join(' ')
+  const canAdd = fullName.trim().length > 0
+
   const handleSubmit = () => {
-    if (!form.name || !form.email) return
+    if (!canAdd) return
     const contact: Contact = {
       id: `c${Date.now()}`,
-      name: form.name,
+      name: fullName,
       phone: form.phone || null,
-      email: form.email,
+      email: form.email || '',
       birthday: form.birthday || null,
       linkedin: form.linkedin || null,
       website: form.website || null,
@@ -91,11 +98,8 @@ export function AddContactModal({ onClose, onAdd }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <div
-        className="bg-[var(--card)] border-2 border-[var(--ink)] rounded-[14px] w-full max-w-md max-h-[90vh] flex flex-col overflow-hidden"
-        style={{ boxSizing: 'border-box' }}
-      >
-        {/* Scrollable content — header at bottom */}
+      <div className="bg-[var(--card)] border-2 border-[var(--ink)] rounded-[14px] w-full max-w-md max-h-[90vh] flex flex-col overflow-hidden">
+        {/* Scrollable content */}
         <div className="flex-1 overflow-y-auto flex flex-col-reverse">
           <div className="px-6 pt-5 pb-4 space-y-5">
 
@@ -112,8 +116,10 @@ export function AddContactModal({ onClose, onAdd }: Props) {
                 />
                 <button
                   onClick={handleAIPull}
-                  disabled={pulling}
-                  className="shrink-0 bg-[var(--gold)] text-[var(--ink)] text-[10px] font-medium uppercase tracking-[0.05em] px-3 py-1 rounded-full border-2 border-[var(--ink)] opacity-60 hover:opacity-90 disabled:opacity-30 transition-opacity whitespace-nowrap"
+                  disabled={pulling || !urlPull}
+                  className={`shrink-0 bg-[var(--gold)] text-[var(--ink)] text-[10px] font-medium uppercase tracking-[0.05em] px-3 py-1 rounded-full border border-[var(--ink)] transition-opacity whitespace-nowrap ${
+                    urlPull && !pulling ? 'opacity-100 hover:opacity-80' : 'opacity-40'
+                  }`}
                 >
                   {pulling ? '...' : 'AI Pull +'}
                 </button>
@@ -122,14 +128,24 @@ export function AddContactModal({ onClose, onAdd }: Props) {
 
             <div className="border-t border-[var(--card-dark)]" />
 
-            {/* Full Name */}
-            <div>
-              <ModalLabel>Full Name *</ModalLabel>
-              <input
-                className={underlineInput}
-                value={form.name}
-                onChange={e => set('name', e.target.value)}
-              />
+            {/* First + Last Name */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <ModalLabel>First Name</ModalLabel>
+                <input
+                  className={underlineInput}
+                  value={form.firstName}
+                  onChange={e => set('firstName', e.target.value)}
+                />
+              </div>
+              <div>
+                <ModalLabel>Last Name</ModalLabel>
+                <input
+                  className={underlineInput}
+                  value={form.lastName}
+                  onChange={e => set('lastName', e.target.value)}
+                />
+              </div>
             </div>
 
             {/* Phone + Email */}
@@ -139,7 +155,7 @@ export function AddContactModal({ onClose, onAdd }: Props) {
                 <input className={underlineInput} value={form.phone} onChange={e => set('phone', e.target.value)} />
               </div>
               <div>
-                <ModalLabel>Email *</ModalLabel>
+                <ModalLabel>Email</ModalLabel>
                 <input type="email" className={underlineInput} value={form.email} onChange={e => set('email', e.target.value)} />
               </div>
             </div>
@@ -172,7 +188,7 @@ export function AddContactModal({ onClose, onAdd }: Props) {
             <div>
               <ModalLabel>Summary</ModalLabel>
               <textarea
-                className="w-full border-2 border-[var(--ink)] bg-transparent rounded-[8px] px-3 py-2 text-[13px] resize-none h-20 focus:outline-none font-light leading-snug"
+                className="w-full border border-[var(--ink)] bg-transparent rounded-[8px] px-3 py-2 text-[13px] resize-none h-20 focus:outline-none font-light leading-snug"
                 value={form.summary}
                 onChange={e => set('summary', e.target.value)}
               />
@@ -180,14 +196,16 @@ export function AddContactModal({ onClose, onAdd }: Props) {
 
             {/* Tags */}
             <div>
-              <ModalLabel>Tags {selectedTags.length > 0 && <span className="opacity-50">({selectedTags.length}/{MAX_TAGS})</span>}</ModalLabel>
+              <ModalLabel>
+                Tags {selectedTags.length > 0 && <span className="opacity-50">({selectedTags.length}/{MAX_TAGS})</span>}
+              </ModalLabel>
               <div className="flex flex-wrap gap-1.5 mt-1">
                 {TAG_OPTIONS.map(tag => (
                   <button
                     key={tag}
                     onClick={() => toggleTag(tag)}
                     disabled={!selectedTags.includes(tag) && selectedTags.length >= MAX_TAGS}
-                    className={`text-[9px] px-2.5 py-1 rounded-full border-2 border-[var(--ink)] uppercase tracking-[0.05em] font-medium transition-colors disabled:opacity-25 ${
+                    className={`text-[9px] px-2.5 py-1 rounded-full border border-[var(--ink)] uppercase tracking-[0.05em] font-medium transition-colors disabled:opacity-25 ${
                       selectedTags.includes(tag)
                         ? 'bg-[var(--ink)] text-[var(--card)]'
                         : 'bg-[var(--card)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--card)]'
@@ -202,28 +220,27 @@ export function AddContactModal({ onClose, onAdd }: Props) {
           </div>
         </div>
 
-        {/* Modal header — fixed at bottom per Figma */}
-        <div className="shrink-0 border-t-2 border-[var(--ink)] px-6 py-4 flex items-center justify-between bg-[var(--card)]">
-          <span className="font-semibold uppercase text-[13.6px] tracking-[0.04em]">Add Contact</span>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={handleSubmit}
-              disabled={!form.name || !form.email}
-              className="bg-[var(--gold)] text-[var(--ink)] text-[10px] font-medium uppercase tracking-[0.06em] px-4 py-1.5 rounded-full border-2 border-[var(--ink)] opacity-60 hover:opacity-100 disabled:opacity-30 transition-opacity"
-            >
-              Add Contact +
-            </button>
-            <button onClick={onClose} className="text-[var(--ink)] opacity-60 hover:opacity-100 transition-opacity">
-              <X size={18} strokeWidth={2} />
-            </button>
-          </div>
+        {/* Modal footer — header at bottom per Figma */}
+        <div className="shrink-0 border-t-2 border-[var(--ink)] px-6 py-4 flex items-center justify-end gap-3 bg-[var(--card)]">
+          <button
+            onClick={handleSubmit}
+            disabled={!canAdd}
+            className={`bg-[var(--gold)] text-[var(--ink)] text-[10px] font-medium uppercase tracking-[0.06em] px-4 py-1.5 rounded-full border border-[var(--ink)] transition-opacity ${
+              canAdd ? 'opacity-100 hover:opacity-80' : 'opacity-40 cursor-default'
+            }`}
+          >
+            Add Contact +
+          </button>
+          <button onClick={onClose} className="text-[var(--ink)] opacity-60 hover:opacity-100 transition-opacity">
+            <X size={18} strokeWidth={2} />
+          </button>
         </div>
       </div>
     </div>
   )
 }
 
-const underlineInput = 'w-full border-b-2 border-[var(--ink)] bg-transparent py-1 text-[13px] focus:outline-none font-light leading-snug placeholder:text-[var(--muted)] placeholder:opacity-60'
+const underlineInput = 'w-full border-b border-[var(--ink)] bg-transparent py-1 text-[13px] focus:outline-none font-light leading-snug placeholder:text-[var(--muted)] placeholder:opacity-60'
 
 function ModalLabel({ children }: { children: React.ReactNode }) {
   return (
