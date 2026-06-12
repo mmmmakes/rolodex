@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Contact, Update } from '@/lib/types'
 import { formatDate, formatDateShort } from '@/lib/utils'
 import { Tag } from './Tag'
-import { ChevronDown, ChevronUp, ExternalLink } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 
 interface Props {
   contact: Contact | null
@@ -12,49 +12,71 @@ interface Props {
   onMarkRead: (contactId: string, updateId: string) => void
 }
 
-function UpdateEntry({ update }: { update: Update }) {
-  const [expanded, setExpanded] = useState(update.new)
-
+function UpdateCard({ update, contactId, onMarkRead }: { update: Update; contactId: string; onMarkRead: (cid: string, uid: string) => void }) {
   return (
-    <div className="border-b border-[var(--card-dark)] pb-3 last:border-0">
-      <button
-        className="w-full text-left flex items-start justify-between gap-2"
-        onClick={() => setExpanded(e => !e)}
-      >
-        <div className="flex items-center gap-2 flex-1 min-w-0">
-          {update.new && (
-            <span className="shrink-0 w-2 h-2 rounded-full bg-[var(--gold)]" />
-          )}
-          <span className="font-bold text-sm uppercase tracking-wide leading-snug">
-            {update.title}
-          </span>
-        </div>
-        <div className="flex items-center gap-2 shrink-0">
-          <span className="text-[10px] text-[var(--muted)]">{formatDateShort(update.date)}</span>
-          {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-        </div>
-      </button>
+    <div className={`bg-[var(--card)] border-[1.5px] border-[var(--ink)] rounded-[17px] px-[13px] pt-[9px] pb-[20px] relative ${update.new ? 'border-[var(--gold)]' : ''}`}>
+      {update.new && (
+        <span className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />
+      )}
 
-      {expanded && (
-        <div className="mt-2 space-y-2">
-          <p className="text-sm text-[var(--muted)] leading-relaxed">{update.summary}</p>
-          {update.notes && (
-            <div className="bg-[var(--card-dark)] rounded p-2 text-xs text-[var(--ink)] italic">
+      {/* Title + date */}
+      <div className="flex items-baseline justify-between gap-2 mb-1.5">
+        <span className="font-semibold uppercase text-[13.6px] tracking-[0.03em] leading-tight flex-1 min-w-0 pr-4">
+          {update.title}
+        </span>
+        <span className="text-[9px] text-[var(--muted)] uppercase tracking-[0.05em] shrink-0 whitespace-nowrap">
+          {formatDateShort(update.date)}
+        </span>
+      </div>
+
+      {/* Summary */}
+      <p className="text-[13.6px] font-light leading-[1.35] text-[var(--ink)] mb-3">
+        {update.summary}
+      </p>
+
+      {/* Notes section */}
+      <div className="border-t border-[var(--card-dark)] pt-2 mt-1">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-[9px] uppercase tracking-[0.08em] text-[var(--muted)] font-medium">Notes</span>
+          <button className="text-[9px] uppercase tracking-[0.06em] bg-[var(--gold)] text-[var(--ink)] px-2 py-0.5 rounded-full border border-[var(--ink)] font-medium opacity-70 hover:opacity-100 transition-opacity">
+            Add a note +
+          </button>
+          {!update.sent_message && (
+            <button className="text-[9px] uppercase tracking-[0.06em] bg-[var(--gold)] text-[var(--ink)] px-2 py-0.5 rounded-full border border-[var(--ink)] font-medium opacity-70 hover:opacity-100 transition-opacity">
+              Sent a message
+            </button>
+          )}
+        </div>
+
+        {update.notes && (
+          <div className="flex gap-2">
+            <div className="w-px bg-[var(--ink)] opacity-20 shrink-0 ml-1" />
+            <div className="text-[11px] text-[var(--ink)] italic leading-snug pl-1">
               {update.notes_date && (
-                <span className="not-italic font-bold text-[var(--muted)] block mb-0.5">
-                  Note · {formatDateShort(update.notes_date)}
+                <span className="not-italic text-[9px] uppercase tracking-[0.05em] text-[var(--muted)] block mb-0.5">
+                  {formatDateShort(update.notes_date)}
                 </span>
               )}
               {update.notes}
             </div>
-          )}
-          {update.sent_message && update.sent_message_date && (
-            <p className="text-[10px] text-[var(--muted)] uppercase tracking-wide">
-              ✓ Message sent {formatDateShort(update.sent_message_date)}
-            </p>
-          )}
-        </div>
-      )}
+          </div>
+        )}
+
+        {update.sent_message && update.sent_message_date && (
+          <p className="text-[9px] text-[var(--muted)] uppercase tracking-[0.06em] mt-1 flex items-center gap-1">
+            <span className="text-[var(--gold)]">✓</span> Message sent {formatDateShort(update.sent_message_date)}
+          </p>
+        )}
+
+        {update.new && (
+          <button
+            onClick={() => onMarkRead(contactId, update.id)}
+            className="mt-1.5 text-[9px] uppercase tracking-[0.06em] text-[var(--muted)] underline underline-offset-2 hover:text-[var(--ink)] transition-colors"
+          >
+            Mark read
+          </button>
+        )}
+      </div>
     </div>
   )
 }
@@ -64,7 +86,7 @@ export function DetailPanel({ contact, onUpdateContact, onMarkRead }: Props) {
 
   if (!contact) {
     return (
-      <div className="flex items-center justify-center h-full text-[var(--muted)] text-sm">
+      <div className="flex items-center justify-center h-full text-[var(--muted)] text-sm uppercase tracking-[0.08em]">
         Select a contact
       </div>
     )
@@ -83,52 +105,50 @@ export function DetailPanel({ contact, onUpdateContact, onMarkRead }: Props) {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
 
+  const summary = contact.updates.length > 0
+    ? sortedUpdates[0].summary
+    : null
+
   return (
     <div className="h-full flex flex-col overflow-hidden">
-      {/* Header */}
-      <div className="pb-4 border-b border-[var(--card-dark)] mb-4 shrink-0">
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <h1 className="font-bold uppercase text-xl tracking-wide leading-tight">
+      {/* Contact header */}
+      <div className="shrink-0 pb-4 mb-4 border-b border-[var(--card-dark)]">
+        {/* Name + tags row */}
+        <div className="flex items-start justify-between gap-4 mb-3">
+          <h1 className="font-semibold uppercase text-[37px] tracking-[0.01em] leading-[0.95]">
             {contact.name}
           </h1>
-          <button
-            onClick={handleUpdate}
-            disabled={updating}
-            className="shrink-0 bg-[var(--gold)] hover:bg-[var(--gold-dark)] disabled:opacity-50 text-white font-bold uppercase text-[10px] tracking-widest px-3 py-1.5 rounded-full transition-colors"
-          >
-            {updating ? 'Updating...' : 'AI Update'}
-          </button>
+          <div className="flex flex-wrap gap-1 justify-end pt-1 max-w-[40%]">
+            {contact.tags.map(tag => (
+              <Tag key={tag} label={tag} size="md" />
+            ))}
+          </div>
         </div>
 
         {/* Dates row */}
-        <div className="flex flex-wrap gap-x-4 gap-y-1 text-[10px] text-[var(--muted)] uppercase tracking-wide mb-3">
-          <span>Date met: {formatDateShort(contact.date_added)}</span>
-          <span>Last update: {formatDateShort(contact.last_updated)}</span>
-          <span>Last contact: {formatDateShort(contact.last_contacted)}</span>
+        <div className="flex flex-wrap gap-x-5 gap-y-1 text-[10px] text-[var(--muted)] uppercase tracking-[0.07em] mb-3 font-medium">
+          <span>Date Met: {formatDateShort(contact.date_added)}</span>
+          <span>Last Update: {formatDateShort(contact.last_updated)}</span>
+          <span>Last Contact: {formatDateShort(contact.last_contacted)}</span>
           {contact.birthday && <span>Birthday: {formatDateShort(contact.birthday)}</span>}
         </div>
 
-        {/* Tags */}
-        <div className="flex flex-wrap gap-1 mb-3">
-          {contact.tags.map(tag => (
-            <Tag key={tag} label={tag} size="md" />
-          ))}
-        </div>
-
         {/* Contact info */}
-        <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[var(--muted)]">
+        <div className="flex flex-wrap gap-x-5 gap-y-0.5 text-[11px] text-[var(--muted)] mb-1.5 font-medium">
           {contact.phone && <span>{contact.phone}</span>}
           {contact.email && <span>{contact.email}</span>}
         </div>
-        <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs mt-1">
+
+        {/* Links */}
+        <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px]">
           {contact.linkedin && (
             <a
               href={`https://${contact.linkedin.replace(/^https?:\/\//, '')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-0.5 text-[var(--ink)] underline hover:text-[var(--gold)]"
+              className="flex items-center gap-0.5 text-[var(--ink)] underline underline-offset-2 hover:text-[var(--gold)] transition-colors font-medium"
             >
-              LinkedIn <ExternalLink size={10} />
+              LinkedIn <ExternalLink size={9} />
             </a>
           )}
           {contact.website && (
@@ -136,9 +156,9 @@ export function DetailPanel({ contact, onUpdateContact, onMarkRead }: Props) {
               href={`https://${contact.website.replace(/^https?:\/\//, '')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-0.5 text-[var(--ink)] underline hover:text-[var(--gold)]"
+              className="flex items-center gap-0.5 text-[var(--ink)] underline underline-offset-2 hover:text-[var(--gold)] transition-colors font-medium"
             >
-              Website <ExternalLink size={10} />
+              Website <ExternalLink size={9} />
             </a>
           )}
           {contact.instagram && (
@@ -146,36 +166,52 @@ export function DetailPanel({ contact, onUpdateContact, onMarkRead }: Props) {
               href={`https://instagram.com/${contact.instagram.replace('@', '')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-0.5 text-[var(--ink)] underline hover:text-[var(--gold)]"
+              className="flex items-center gap-0.5 text-[var(--ink)] underline underline-offset-2 hover:text-[var(--gold)] transition-colors font-medium"
             >
-              {contact.instagram} <ExternalLink size={10} />
+              {contact.instagram} <ExternalLink size={9} />
             </a>
           )}
         </div>
+
+        {/* Summary */}
+        {summary && (
+          <div className="mt-3">
+            <p className="text-[9px] uppercase tracking-[0.1em] text-[var(--muted)] font-medium mb-1">Summary</p>
+            <p className="text-[13px] font-light leading-[1.4] text-[var(--ink)]">{summary}</p>
+          </div>
+        )}
       </div>
 
-      {/* Dates summary */}
-      <div className="shrink-0 mb-4">
-        <div className="flex items-center justify-between mb-2">
-          <h2 className="font-bold uppercase text-sm tracking-widest">Update Log</h2>
-          {contact.updates.some(u => u.new) && (
-            <button
-              onClick={() => contact.updates.filter(u => u.new).forEach(u => onMarkRead(contact.id, u.id))}
-              className="text-[10px] text-[var(--muted)] uppercase tracking-wide underline hover:text-[var(--ink)]"
-            >
-              Mark all read
-            </button>
-          )}
-        </div>
+      {/* Update Log header */}
+      <div className="shrink-0 flex items-center gap-3 mb-3">
+        <h2 className="font-semibold uppercase text-[19px] tracking-[0.02em]">Update Log</h2>
+        <button
+          onClick={handleUpdate}
+          disabled={updating}
+          className="text-[9px] uppercase tracking-[0.07em] bg-[var(--gold)] text-[var(--ink)] px-3 py-1 rounded-full border border-[var(--ink)] font-medium opacity-70 hover:opacity-100 disabled:opacity-30 transition-opacity whitespace-nowrap"
+        >
+          {updating ? 'Updating...' : 'AI Update +'}
+        </button>
+        <button className="text-[9px] uppercase tracking-[0.07em] bg-[var(--gold)] text-[var(--ink)] px-3 py-1 rounded-full border border-[var(--ink)] font-medium opacity-70 hover:opacity-100 transition-opacity whitespace-nowrap">
+          Add an Update +
+        </button>
+        {contact.updates.some(u => u.new) && (
+          <button
+            onClick={() => contact.updates.filter(u => u.new).forEach(u => onMarkRead(contact.id, u.id))}
+            className="ml-auto text-[9px] uppercase tracking-[0.06em] text-[var(--muted)] underline underline-offset-2 hover:text-[var(--ink)] transition-colors"
+          >
+            Mark all read
+          </button>
+        )}
       </div>
 
-      {/* Update log */}
-      <div className="flex-1 overflow-y-auto space-y-3 pr-1">
+      {/* Update cards */}
+      <div className="flex-1 overflow-y-auto space-y-3 pr-0.5">
         {sortedUpdates.length === 0 ? (
-          <p className="text-sm text-[var(--muted)]">No updates yet. Click AI Update to fetch.</p>
+          <p className="text-[11px] text-[var(--muted)] uppercase tracking-[0.07em]">No updates yet. Click AI Update + to fetch.</p>
         ) : (
           sortedUpdates.map(update => (
-            <UpdateEntry key={update.id} update={update} />
+            <UpdateCard key={update.id} update={update} contactId={contact.id} onMarkRead={onMarkRead} />
           ))
         )}
       </div>

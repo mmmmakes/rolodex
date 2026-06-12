@@ -12,7 +12,10 @@ interface Props {
 const TAG_OPTIONS = [
   'Work', 'Friend', 'Mentor', 'Investor', 'College', 'Design', 'Tech',
   'SF', 'NYC', 'LA', 'Chicago', 'London', 'Miami', 'VC', 'UX', 'Film', 'Art',
+  'Art Direction', 'Branding', 'Strategy', 'Agency', 'Freelance',
 ]
+
+const MAX_TAGS = 10
 
 export function AddContactModal({ onClose, onAdd }: Props) {
   const [form, setForm] = useState({
@@ -26,7 +29,11 @@ export function AddContactModal({ onClose, onAdd }: Props) {
   const set = (key: string, value: string) => setForm(f => ({ ...f, [key]: value }))
 
   const toggleTag = (tag: string) =>
-    setSelectedTags(t => t.includes(tag) ? t.filter(x => x !== tag) : [...t, tag])
+    setSelectedTags(t =>
+      t.includes(tag)
+        ? t.filter(x => x !== tag)
+        : t.length < MAX_TAGS ? [...t, tag] : t
+    )
 
   const handleAIPull = async () => {
     if (!urlPull) return
@@ -40,7 +47,7 @@ export function AddContactModal({ onClose, onAdd }: Props) {
       const data = await res.json()
       if (data.contact) {
         setForm(f => ({ ...f, ...data.contact }))
-        if (data.contact.tags) setSelectedTags(data.contact.tags)
+        if (data.contact.tags) setSelectedTags(data.contact.tags.slice(0, MAX_TAGS))
       }
     } catch (e) {
       console.error(e)
@@ -60,7 +67,7 @@ export function AddContactModal({ onClose, onAdd }: Props) {
       linkedin: form.linkedin || null,
       website: form.website || null,
       instagram: form.instagram || null,
-      tags: selectedTags,
+      tags: selectedTags.slice(0, MAX_TAGS),
       date_added: new Date().toISOString().split('T')[0],
       last_updated: new Date().toISOString().split('T')[0],
       last_contacted: new Date().toISOString().split('T')[0],
@@ -84,123 +91,144 @@ export function AddContactModal({ onClose, onAdd }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <div className="bg-[var(--card)] border border-[var(--ink)] rounded w-full max-w-lg max-h-[90vh] flex flex-col">
-        {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-[var(--card-dark)]">
-          <h2 className="font-bold uppercase tracking-widest text-sm">Add Contact</h2>
-          <button onClick={onClose}><X size={18} /></button>
-        </div>
+      <div
+        className="bg-[var(--card)] border-2 border-[var(--ink)] rounded-[14px] w-full max-w-md max-h-[90vh] flex flex-col overflow-hidden"
+        style={{ boxSizing: 'border-box' }}
+      >
+        {/* Scrollable content — header at bottom */}
+        <div className="flex-1 overflow-y-auto flex flex-col-reverse">
+          <div className="px-6 pt-5 pb-4 space-y-5">
 
-        <div className="overflow-y-auto flex-1 p-4 space-y-4">
-          {/* AI Pull */}
-          <div>
-            <label className="text-xs text-[var(--muted)] uppercase tracking-wide block mb-1">
-              Pull from URL (LinkedIn, website)
-            </label>
-            <div className="flex gap-2">
-              <input
-                type="url"
-                placeholder="https://linkedin.com/in/..."
-                value={urlPull}
-                onChange={e => setUrlPull(e.target.value)}
-                className="flex-1 border border-[var(--ink)] bg-white rounded px-2 py-1.5 text-sm focus:outline-none"
-              />
-              <button
-                onClick={handleAIPull}
-                disabled={pulling}
-                className="bg-[var(--ink)] text-[var(--card)] text-xs font-bold uppercase px-3 py-1.5 rounded disabled:opacity-50"
-              >
-                {pulling ? '...' : 'AI Pull'}
-              </button>
-            </div>
-          </div>
-
-          <hr className="border-[var(--card-dark)]" />
-
-          {/* Name */}
-          <Field label="Full Name *">
-            <input className={inputCls} value={form.name} onChange={e => set('name', e.target.value)} />
-          </Field>
-
-          {/* Phone / Email */}
-          <div className="grid grid-cols-2 gap-3">
-            <Field label="Phone">
-              <input className={inputCls} value={form.phone} onChange={e => set('phone', e.target.value)} />
-            </Field>
-            <Field label="Email *">
-              <input type="email" className={inputCls} value={form.email} onChange={e => set('email', e.target.value)} />
-            </Field>
-          </div>
-
-          {/* Birthday */}
-          <Field label="Birthday">
-            <input type="date" className={inputCls} value={form.birthday} onChange={e => set('birthday', e.target.value)} />
-          </Field>
-
-          {/* Social */}
-          <Field label="LinkedIn">
-            <input className={inputCls} placeholder="linkedin.com/in/..." value={form.linkedin} onChange={e => set('linkedin', e.target.value)} />
-          </Field>
-          <Field label="Website">
-            <input className={inputCls} value={form.website} onChange={e => set('website', e.target.value)} />
-          </Field>
-          <Field label="Instagram">
-            <input className={inputCls} placeholder="@handle" value={form.instagram} onChange={e => set('instagram', e.target.value)} />
-          </Field>
-
-          {/* Summary */}
-          <Field label="Summary">
-            <textarea
-              className={`${inputCls} resize-none h-20`}
-              value={form.summary}
-              onChange={e => set('summary', e.target.value)}
-            />
-          </Field>
-
-          {/* Tags */}
-          <div>
-            <label className="text-xs text-[var(--muted)] uppercase tracking-wide block mb-2">Tags</label>
-            <div className="flex flex-wrap gap-1.5">
-              {TAG_OPTIONS.map(tag => (
+            {/* AI Pull from URL */}
+            <div>
+              <ModalLabel>Pull from URL</ModalLabel>
+              <div className="flex items-end gap-2">
+                <input
+                  type="url"
+                  placeholder="linkedin.com/in/..."
+                  value={urlPull}
+                  onChange={e => setUrlPull(e.target.value)}
+                  className={underlineInput + ' flex-1'}
+                />
                 <button
-                  key={tag}
-                  onClick={() => toggleTag(tag)}
-                  className={`text-[10px] px-2.5 py-1 rounded-full border border-[var(--ink)] uppercase tracking-wide transition-colors ${
-                    selectedTags.includes(tag)
-                      ? 'bg-[var(--ink)] text-[var(--card)]'
-                      : 'bg-transparent text-[var(--ink)]'
-                  }`}
+                  onClick={handleAIPull}
+                  disabled={pulling}
+                  className="shrink-0 bg-[var(--gold)] text-[var(--ink)] text-[10px] font-medium uppercase tracking-[0.05em] px-3 py-1 rounded-full border-2 border-[var(--ink)] opacity-60 hover:opacity-90 disabled:opacity-30 transition-opacity whitespace-nowrap"
                 >
-                  {tag}
+                  {pulling ? '...' : 'AI Pull +'}
                 </button>
-              ))}
+              </div>
             </div>
+
+            <div className="border-t border-[var(--card-dark)]" />
+
+            {/* Full Name */}
+            <div>
+              <ModalLabel>Full Name *</ModalLabel>
+              <input
+                className={underlineInput}
+                value={form.name}
+                onChange={e => set('name', e.target.value)}
+              />
+            </div>
+
+            {/* Phone + Email */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <ModalLabel>Phone</ModalLabel>
+                <input className={underlineInput} value={form.phone} onChange={e => set('phone', e.target.value)} />
+              </div>
+              <div>
+                <ModalLabel>Email *</ModalLabel>
+                <input type="email" className={underlineInput} value={form.email} onChange={e => set('email', e.target.value)} />
+              </div>
+            </div>
+
+            {/* Birthday */}
+            <div>
+              <ModalLabel>Birthday</ModalLabel>
+              <input type="date" className={underlineInput} value={form.birthday} onChange={e => set('birthday', e.target.value)} />
+            </div>
+
+            {/* LinkedIn */}
+            <div>
+              <ModalLabel>LinkedIn</ModalLabel>
+              <input className={underlineInput} placeholder="linkedin.com/in/..." value={form.linkedin} onChange={e => set('linkedin', e.target.value)} />
+            </div>
+
+            {/* Website */}
+            <div>
+              <ModalLabel>Website</ModalLabel>
+              <input className={underlineInput} value={form.website} onChange={e => set('website', e.target.value)} />
+            </div>
+
+            {/* Instagram */}
+            <div>
+              <ModalLabel>Instagram</ModalLabel>
+              <input className={underlineInput} placeholder="@handle" value={form.instagram} onChange={e => set('instagram', e.target.value)} />
+            </div>
+
+            {/* Summary */}
+            <div>
+              <ModalLabel>Summary</ModalLabel>
+              <textarea
+                className="w-full border-2 border-[var(--ink)] bg-transparent rounded-[8px] px-3 py-2 text-[13px] resize-none h-20 focus:outline-none font-light leading-snug"
+                value={form.summary}
+                onChange={e => set('summary', e.target.value)}
+              />
+            </div>
+
+            {/* Tags */}
+            <div>
+              <ModalLabel>Tags {selectedTags.length > 0 && <span className="opacity-50">({selectedTags.length}/{MAX_TAGS})</span>}</ModalLabel>
+              <div className="flex flex-wrap gap-1.5 mt-1">
+                {TAG_OPTIONS.map(tag => (
+                  <button
+                    key={tag}
+                    onClick={() => toggleTag(tag)}
+                    disabled={!selectedTags.includes(tag) && selectedTags.length >= MAX_TAGS}
+                    className={`text-[9px] px-2.5 py-1 rounded-full border-2 border-[var(--ink)] uppercase tracking-[0.05em] font-medium transition-colors disabled:opacity-25 ${
+                      selectedTags.includes(tag)
+                        ? 'bg-[var(--ink)] text-[var(--card)]'
+                        : 'bg-[var(--card)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--card)]'
+                    }`}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="flex justify-end gap-3 p-4 border-t border-[var(--card-dark)]">
-          <button onClick={onClose} className="text-sm text-[var(--muted)] underline">Cancel</button>
-          <button
-            onClick={handleSubmit}
-            disabled={!form.name || !form.email}
-            className="bg-[var(--ink)] text-[var(--card)] font-bold uppercase text-xs tracking-widest px-4 py-2 rounded-full disabled:opacity-40"
-          >
-            Add Contact
-          </button>
+        {/* Modal header — fixed at bottom per Figma */}
+        <div className="shrink-0 border-t-2 border-[var(--ink)] px-6 py-4 flex items-center justify-between bg-[var(--card)]">
+          <span className="font-semibold uppercase text-[13.6px] tracking-[0.04em]">Add Contact</span>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleSubmit}
+              disabled={!form.name || !form.email}
+              className="bg-[var(--gold)] text-[var(--ink)] text-[10px] font-medium uppercase tracking-[0.06em] px-4 py-1.5 rounded-full border-2 border-[var(--ink)] opacity-60 hover:opacity-100 disabled:opacity-30 transition-opacity"
+            >
+              Add Contact +
+            </button>
+            <button onClick={onClose} className="text-[var(--ink)] opacity-60 hover:opacity-100 transition-opacity">
+              <X size={18} strokeWidth={2} />
+            </button>
+          </div>
         </div>
       </div>
     </div>
   )
 }
 
-const inputCls = 'w-full border border-[var(--card-dark)] bg-white rounded px-2 py-1.5 text-sm focus:outline-none focus:border-[var(--ink)]'
+const underlineInput = 'w-full border-b-2 border-[var(--ink)] bg-transparent py-1 text-[13px] focus:outline-none font-light leading-snug placeholder:text-[var(--muted)] placeholder:opacity-60'
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function ModalLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      <label className="text-xs text-[var(--muted)] uppercase tracking-wide block mb-1">{label}</label>
+    <label className="block text-[10px] font-medium uppercase tracking-[-0.25px] opacity-60 mb-1">
       {children}
-    </div>
+    </label>
   )
 }

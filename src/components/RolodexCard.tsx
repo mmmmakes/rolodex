@@ -14,77 +14,72 @@ interface Props {
 
 export function RolodexCard({ contact, total, index, onPrev, onNext }: Props) {
   return (
-    <div className="flex gap-2 h-full">
-      {/* Left nav arrow */}
-      <div className="flex flex-col justify-center">
+    <div className="flex h-full">
+      {/* Left nav */}
+      <div className="flex flex-col justify-center pr-2">
         <button
           onClick={onPrev}
-          className="w-5 flex flex-col items-center gap-0.5 opacity-60 hover:opacity-100 transition-opacity py-8"
+          className="flex flex-col items-center gap-1 opacity-40 hover:opacity-80 transition-opacity py-6"
           aria-label="Previous contact"
         >
-          <div className="w-px bg-[var(--ink)] flex-1" />
-          <svg width="10" height="7" viewBox="0 0 10 7" fill="none">
-            <path d="M5 0L10 7H0L5 0Z" fill="var(--ink)" />
+          <div className="w-px bg-[var(--ink)] h-12" />
+          <svg width="9" height="6" viewBox="0 0 9 6" fill="none">
+            <path d="M4.5 0L9 6H0L4.5 0Z" fill="var(--ink)" />
           </svg>
         </button>
       </div>
 
       {/* Card stack */}
-      <div className="flex-1 relative flex flex-col">
+      <div className="flex-1 relative flex flex-col min-w-0">
         {/* Counter */}
-        <div className="text-right text-xs text-[var(--muted)] mb-1 pr-1">
-          {index + 1}/{total}
+        <div className="text-right text-[9px] text-[var(--muted)] mb-1 uppercase tracking-[0.06em]">
+          {index + 1} / {total}
         </div>
 
         {/* Top card */}
-        <div className="flex-1 bg-[var(--card)] border border-[var(--ink)] rounded p-4 relative z-10">
-          {/* Header row */}
+        <div className="flex-1 bg-[var(--card)] border border-[var(--ink)] rounded px-4 pt-4 pb-3 relative z-10 flex flex-col">
           <div className="flex items-start justify-between gap-2 mb-2">
-            <span className="font-bold uppercase text-base tracking-wide leading-tight">
+            <span className="font-semibold uppercase text-[19px] tracking-[0.02em] leading-tight">
               {contact.name}
             </span>
-            <span className="text-[10px] text-[var(--muted)] whitespace-nowrap mt-1">
-              LAST UPDATE: {formatDateShort(contact.last_updated)}
+            <span className="text-[9px] text-[var(--muted)] whitespace-nowrap uppercase tracking-[0.05em] mt-1 shrink-0">
+              {formatDateShort(contact.last_updated)}
             </span>
           </div>
 
-          {/* Tags */}
           <div className="flex flex-wrap gap-1 mb-3">
             {contact.tags.map(tag => (
               <Tag key={tag} label={tag} />
             ))}
           </div>
 
-          {/* Contact info */}
-          <div className="flex gap-6 text-xs text-[var(--muted)]">
+          <div className="mt-auto flex flex-wrap gap-x-4 gap-y-0.5 text-[11px] text-[var(--muted)]">
             {contact.phone && <span>{contact.phone}</span>}
             {contact.email && <span>{contact.email}</span>}
           </div>
         </div>
 
-        {/* Rolodex prongs + second card peek */}
-        <div className="relative h-20 flex items-start justify-center pt-0">
-          {/* Peeking card behind */}
-          <div className="absolute inset-x-2 top-0 h-16 bg-[var(--card-dark)] border border-[var(--ink)] rounded z-0" />
-          {/* Prongs */}
-          <div className="relative z-10 flex gap-12 -mt-1">
-            <div className="w-6 h-16 bg-[var(--ink)] rounded-sm" />
-            <div className="w-6 h-16 bg-[var(--ink)] rounded-sm" />
+        {/* Prongs + peeking second card */}
+        <div className="relative h-[88px] flex justify-center items-start">
+          <div className="absolute inset-x-3 top-0 h-20 bg-[var(--card-dark)] border border-[var(--ink)] rounded z-0" />
+          <div className="relative z-10 flex gap-16 mt-0">
+            <div className="w-[30px] h-[92px] bg-[var(--ink)] rounded-[3px]" />
+            <div className="w-[30px] h-[92px] bg-[var(--ink)] rounded-[3px]" />
           </div>
         </div>
       </div>
 
-      {/* Right nav arrow */}
-      <div className="flex flex-col justify-center">
+      {/* Right nav */}
+      <div className="flex flex-col justify-center pl-2">
         <button
           onClick={onNext}
-          className="w-5 flex flex-col items-center gap-0.5 opacity-60 hover:opacity-100 transition-opacity py-8"
+          className="flex flex-col items-center gap-1 opacity-40 hover:opacity-80 transition-opacity py-6"
           aria-label="Next contact"
         >
-          <svg width="10" height="7" viewBox="0 0 10 7" fill="none">
-            <path d="M5 7L0 0H10L5 7Z" fill="var(--ink)" />
+          <svg width="9" height="6" viewBox="0 0 9 6" fill="none">
+            <path d="M4.5 6L0 0H9L4.5 6Z" fill="var(--ink)" />
           </svg>
-          <div className="w-px bg-[var(--ink)] flex-1" />
+          <div className="w-px bg-[var(--ink)] h-12" />
         </button>
       </div>
     </div>

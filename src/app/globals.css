@@ -1,16 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg: #7a9bb5;
-  --card: #ede8d8;
-  --card-dark: #dfd9c6;
-  --gold: #c4962a;
-  --gold-dark: #a87d1e;
-  --ink: #1a1a1a;
-  --muted: #666;
-  --border: #1a1a1a;
+  --bg: #a8c0da;
+  --card: #eae3d1;
+  --card-dark: #ddd6c0;
+  --gold: #d29614;
+  --gold-dark: #b07f0e;
+  --ink: #1e2221;
+  --muted: rgba(30,34,33,0.55);
+  --border: #1e2221;
 }
 
 * { box-sizing: border-box; }
@@ -18,11 +20,12 @@
 body {
   background-color: var(--bg);
   color: var(--ink);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Jost', Arial, sans-serif;
   margin: 0;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-::-webkit-scrollbar { width: 5px; height: 5px; }
-::-webkit-scrollbar-track { background: var(--card-dark); border-radius: 3px; }
-::-webkit-scrollbar-thumb { background: #aaa; border-radius: 3px; }
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(30,34,33,0.25); border-radius: 4px; }

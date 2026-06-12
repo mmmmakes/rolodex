@@ -1,6 +1,5 @@
 'use client'
 
-import { Search } from 'lucide-react'
 import { Contact, SortField } from '@/lib/types'
 import { Tag } from './Tag'
 
@@ -36,38 +35,34 @@ export function FilterPanel({
 
   return (
     <div className="space-y-3">
-      {/* Add Contact */}
-      <div className="flex justify-end">
+      {/* Search + Add Contact row */}
+      <div className="flex items-center gap-2">
+        <input
+          type="text"
+          placeholder="TYPE TO SEARCH..."
+          value={search}
+          onChange={e => onSearch(e.target.value)}
+          className="flex-1 border-b border-[var(--ink)] bg-transparent px-0 py-1 text-[11px] uppercase tracking-[0.08em] placeholder:text-[var(--muted)] focus:outline-none font-medium"
+        />
         <button
           onClick={onAddContact}
-          className="bg-[var(--gold)] hover:bg-[var(--gold-dark)] text-white font-bold uppercase text-xs tracking-widest px-4 py-2 rounded-full transition-colors"
+          className="shrink-0 bg-[var(--gold)] text-[var(--ink)] font-medium uppercase text-[10px] tracking-[0.06em] px-3 py-1.5 rounded-[49px] border border-[var(--ink)] transition-opacity hover:opacity-80 whitespace-nowrap"
         >
           Add Contact +
         </button>
       </div>
 
-      {/* Search */}
-      <div className="relative">
-        <input
-          type="text"
-          placeholder="Type to Search..."
-          value={search}
-          onChange={e => onSearch(e.target.value)}
-          className="w-full border border-[var(--ink)] bg-[var(--card)] rounded px-3 py-2 pr-9 text-sm placeholder:text-[var(--muted)] focus:outline-none focus:ring-1 focus:ring-[var(--ink)]"
-        />
-        <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
-      </div>
-
       {/* Sort */}
       <div>
-        <p className="text-xs font-bold uppercase tracking-widest mb-2">Filter by</p>
         <div className="flex gap-3 flex-wrap mb-2">
           {SORT_OPTIONS.map(({ field, label }) => (
             <button
               key={field}
               onClick={() => onSort(field)}
-              className={`text-xs uppercase tracking-wide underline-offset-2 ${
-                sortBy === field ? 'font-bold underline' : 'text-[var(--muted)]'
+              className={`text-[9px] uppercase tracking-[0.06em] transition-opacity ${
+                sortBy === field
+                  ? 'font-semibold opacity-100 underline underline-offset-2'
+                  : 'opacity-50 hover:opacity-80'
               }`}
             >
               {label}
@@ -76,7 +71,7 @@ export function FilterPanel({
         </div>
 
         {/* Tag filters */}
-        <div className="flex flex-wrap gap-1 max-h-24 overflow-y-auto">
+        <div className="flex flex-wrap gap-1 max-h-20 overflow-y-auto">
           {allTags.map(tag => (
             <Tag
               key={tag}
