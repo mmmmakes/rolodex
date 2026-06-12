@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Contact, ViewMode, SortField, DateFilter, DateFilterField } from '@/lib/types'
+import { Contact, Update, ViewMode, SortField, DateFilter, DateFilterField } from '@/lib/types'
 import mockData from '@/lib/mock-data.json'
 import { ViewToggle } from '@/components/ViewToggle'
 import { RolodexCard } from '@/components/RolodexCard'
@@ -88,6 +88,15 @@ export default function Home() {
 
   const handleAddContact = (contact: Contact) =>
     setContacts(cs => [contact, ...cs])
+
+  const handleAddUpdate = (contactId: string, update: Update) =>
+    setContacts(cs =>
+      cs.map(c =>
+        c.id === contactId
+          ? { ...c, last_updated: update.date, updates: [update, ...c.updates] }
+          : c
+      )
+    )
 
   const handleMarkAllRead = (contactId: string) =>
     setContacts(cs =>
@@ -200,6 +209,7 @@ export default function Home() {
           contact={selectedContact}
           onUpdateContact={handleUpdateContact}
           onMarkAllRead={handleMarkAllRead}
+          onAddUpdate={handleAddUpdate}
         />
       </div>
 

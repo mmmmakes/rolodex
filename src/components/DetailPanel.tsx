@@ -5,11 +5,13 @@ import { Contact, Update } from '@/lib/types'
 import { formatDateShort } from '@/lib/utils'
 import { Tag } from './Tag'
 import { ExternalLink } from 'lucide-react'
+import { AddUpdateModal } from './AddUpdateModal'
 
 interface Props {
   contact: Contact | null
   onUpdateContact: (id: string) => Promise<void>
   onMarkAllRead: (contactId: string) => void
+  onAddUpdate: (contactId: string, update: Update) => void
 }
 
 function UpdateCard({ update }: { update: Update }) {
@@ -74,8 +76,9 @@ function UpdateCard({ update }: { update: Update }) {
   )
 }
 
-export function DetailPanel({ contact, onUpdateContact, onMarkAllRead }: Props) {
+export function DetailPanel({ contact, onUpdateContact, onMarkAllRead, onAddUpdate }: Props) {
   const [updating, setUpdating] = useState(false)
+  const [showAddUpdate, setShowAddUpdate] = useState(false)
 
   // Auto-mark all updates as read when contact is viewed
   useEffect(() => {
@@ -104,8 +107,6 @@ export function DetailPanel({ contact, onUpdateContact, onMarkAllRead }: Props) 
   const sortedUpdates = [...contact.updates].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
-
-  const summary = sortedUpdates.length > 0 ? sortedUpdates[0].summary : null
 
   return (
     <div className="h-full flex flex-col overflow-hidden">
@@ -160,10 +161,10 @@ export function DetailPanel({ contact, onUpdateContact, onMarkAllRead }: Props) 
         </div>
 
         {/* Summary */}
-        {summary && (
+        {contact.summary && (
           <div className="mt-3">
             <p className="text-[9px] uppercase tracking-[0.1em] text-[var(--muted)] font-medium mb-1">Summary</p>
-            <p className="text-[13px] font-light leading-[1.4] text-[var(--ink)]">{summary}</p>
+            <p className="text-[13px] font-light leading-[1.4] text-[var(--ink)]">{contact.summary}</p>
           </div>
         )}
       </div>
@@ -178,10 +179,24 @@ export function DetailPanel({ contact, onUpdateContact, onMarkAllRead }: Props) 
         >
           {updating ? 'Updating...' : 'AI Update +'}
         </button>
-        <button className="text-[9px] uppercase tracking-[0.07em] bg-[var(--gold)] text-[var(--ink)] px-3 py-1 rounded-full border border-[var(--ink)] font-medium hover:scale-[0.96] active:scale-[0.93] transition-transform whitespace-nowrap">
+        <button
+          onClick={() => setShowAddUpdate(true)}
+          className="text-[9px] uppercase tracking-[0.07em] bg-[var(--gold)] text-[var(--ink)] px-3 py-1 rounded-full border border-[var(--ink)] font-medium hover:scale-[0.96] active:scale-[0.93] transition-transform whitespace-nowrap"
+        >
           Add an Update +
         </button>
       </div>
+
+      {showAddUpdate && (
+        <AddUpdateModal
+          contactName={contact.name}
+          onClose={() => setShowAddUpdate(false)}
+          onAdd={update => {
+            onAddUpdate(contact.id, update)
+            setShowAddUpdate(false)
+          }}
+        />
+      )}
 
       {/* Update cards */}
       <div className="flex-1 overflow-y-auto space-y-3 pr-0.5">

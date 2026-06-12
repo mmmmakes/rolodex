@@ -22,6 +22,7 @@ export interface Contact {
   website: string | null
   linkedin: string | null
   instagram: string | null
+  summary: string | null
   tags: string[]
   updates: Update[]
 }
