@@ -28,3 +28,9 @@ export interface Contact {
 
 export type ViewMode = 'rolodex' | 'list'
 export type SortField = 'date_added' | 'last_contacted' | 'last_updated' | 'birthday'
+
+export interface DateFilter {
+  start: string | null
+  end: string | null
+}
+export type DateFilterField = 'date_added' | 'last_contacted' | 'last_updated' | 'birthday'

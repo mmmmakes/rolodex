@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Contact, ViewMode, SortField } from '@/lib/types'
+import { Contact, ViewMode, SortField, DateFilter, DateFilterField } from '@/lib/types'
 import mockData from '@/lib/mock-data.json'
 import { ViewToggle } from '@/components/ViewToggle'
 import { RolodexCard } from '@/components/RolodexCard'
@@ -9,6 +9,22 @@ import { ContactListItem } from '@/components/ContactListItem'
 import { FilterPanel } from '@/components/FilterPanel'
 import { DetailPanel } from '@/components/DetailPanel'
 import { AddContactModal } from '@/components/AddContactModal'
+
+const emptyDateFilter: DateFilter = { start: null, end: null }
+const emptyDateFilters = {
+  date_added: emptyDateFilter,
+  last_contacted: emptyDateFilter,
+  last_updated: emptyDateFilter,
+  birthday: emptyDateFilter,
+}
+
+function matchesDateFilter(value: string | null, filter: DateFilter): boolean {
+  if (!filter.start && !filter.end) return true
+  if (!value) return false
+  if (filter.start && !filter.end) return value === filter.start
+  if (filter.start && filter.end) return value >= filter.start && value <= filter.end
+  return true
+}
 
 export default function Home() {
   const [contacts, setContacts] = useState<Contact[]>(mockData.contacts as Contact[])
@@ -19,6 +35,11 @@ export default function Home() {
   const [sortBy, setSortBy] = useState<SortField>('last_updated')
   const [activeTagFilters, setActiveTagFilters] = useState<string[]>([])
   const [showAddModal, setShowAddModal] = useState(false)
+  const [dateFilters, setDateFilters] = useState<Record<DateFilterField, DateFilter>>(emptyDateFilters)
+
+  const handleDateFilter = (field: DateFilterField, start: string | null, end: string | null) => {
+    setDateFilters(f => ({ ...f, [field]: { start, end } }))
+  }
 
   const filtered = useMemo(() => {
     let list = contacts.filter(c => {
@@ -28,7 +49,12 @@ export default function Home() {
         c.tags.some(t => t.toLowerCase().includes(search.toLowerCase()))
       const matchTags = activeTagFilters.length === 0 ||
         activeTagFilters.some(t => c.tags.includes(t))
-      return matchSearch && matchTags
+      const matchDates =
+        matchesDateFilter(c.date_added, dateFilters.date_added) &&
+        matchesDateFilter(c.last_contacted, dateFilters.last_contacted) &&
+        matchesDateFilter(c.last_updated, dateFilters.last_updated) &&
+        matchesDateFilter(c.birthday, dateFilters.birthday)
+      return matchSearch && matchTags && matchDates
     })
     list = [...list].sort((a, b) => {
       const av = (a[sortBy] ?? '1900-01-01') as string
@@ -36,7 +62,7 @@ export default function Home() {
       return bv > av ? 1 : -1
     })
     return list
-  }, [contacts, search, sortBy, activeTagFilters])
+  }, [contacts, search, sortBy, activeTagFilters, dateFilters])
 
   const selectedContact = contacts.find(c => c.id === selectedId) ?? filtered[0] ?? null
 
@@ -104,11 +130,11 @@ export default function Home() {
               clipPath: 'polygon(0 0, 88% 0, 100% 100%, 0% 100%)',
             }}
           >
-            <span className="font-black uppercase tracking-widest text-white text-sm">Filter</span>
+            <span className="font-semibold uppercase tracking-widest text-[var(--ink)] text-sm">Filter</span>
           </div>
         </div>
 
-        {/* Card area + toggle side by side */}
+        {/* Card area + toggle */}
         <div className="flex gap-3 flex-1 min-h-0">
           <div className="flex-1 bg-[var(--card)] border border-[var(--ink)] rounded p-3 flex flex-col min-h-0 overflow-hidden">
             {viewMode === 'rolodex' ? (
@@ -134,7 +160,7 @@ export default function Home() {
                   />
                 ))}
                 {filtered.length === 0 && (
-                  <p className="text-sm text-center text-[var(--muted)] py-8">No contacts match</p>
+                  <p className="text-[11px] text-center text-[var(--muted)] py-8 uppercase tracking-[0.07em]">No contacts match</p>
                 )}
               </div>
             )}
@@ -156,6 +182,8 @@ export default function Home() {
             activeTagFilters={activeTagFilters}
             onTagFilter={handleTagFilter}
             onAddContact={() => setShowAddModal(true)}
+            dateFilters={dateFilters}
+            onDateFilter={handleDateFilter}
           />
         </div>
       </div>

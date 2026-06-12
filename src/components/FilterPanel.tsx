@@ -1,7 +1,10 @@
 'use client'
 
-import { Contact, SortField } from '@/lib/types'
+import { useState } from 'react'
+import { Contact, SortField, DateFilter, DateFilterField } from '@/lib/types'
 import { Tag } from './Tag'
+import { MiniCalendar } from './MiniCalendar'
+import { ChevronDown } from 'lucide-react'
 
 interface Props {
   contacts: Contact[]
@@ -12,9 +15,11 @@ interface Props {
   activeTagFilters: string[]
   onTagFilter: (tag: string) => void
   onAddContact: () => void
+  dateFilters: Record<DateFilterField, DateFilter>
+  onDateFilter: (field: DateFilterField, start: string | null, end: string | null) => void
 }
 
-const SORT_OPTIONS: { field: SortField; label: string }[] = [
+const DATE_FIELDS: { field: DateFilterField; label: string }[] = [
   { field: 'date_added', label: 'Date Added' },
   { field: 'last_contacted', label: 'Last Contact' },
   { field: 'last_updated', label: 'Last Update' },
@@ -25,13 +30,17 @@ export function FilterPanel({
   contacts,
   search,
   onSearch,
-  sortBy,
-  onSort,
   activeTagFilters,
   onTagFilter,
   onAddContact,
+  dateFilters = { date_added: { start: null, end: null }, last_contacted: { start: null, end: null }, last_updated: { start: null, end: null }, birthday: { start: null, end: null } },
+  onDateFilter,
 }: Props) {
+  const [openCalendar, setOpenCalendar] = useState<DateFilterField | null>(null)
   const allTags = Array.from(new Set(contacts.flatMap(c => c.tags))).sort()
+
+  const isActive = (field: DateFilterField) =>
+    !!(dateFilters[field].start || dateFilters[field].end)
 
   return (
     <div className="space-y-3">
@@ -52,21 +61,44 @@ export function FilterPanel({
         </button>
       </div>
 
-      {/* Sort */}
+      {/* Date filter pills + tag filters */}
       <div>
-        <div className="flex gap-3 flex-wrap mb-2">
-          {SORT_OPTIONS.map(({ field, label }) => (
-            <button
-              key={field}
-              onClick={() => onSort(field)}
-              className={`text-[9px] uppercase tracking-[0.06em] transition-opacity ${
-                sortBy === field
-                  ? 'font-semibold opacity-100 underline underline-offset-2'
-                  : 'opacity-50 hover:opacity-80'
-              }`}
-            >
-              {label}
-            </button>
+        <p className="text-[9px] font-medium uppercase tracking-[0.1em] opacity-60 mb-2">Filter by</p>
+
+        {/* Date filter pills */}
+        <div className="flex flex-wrap gap-1.5 mb-2">
+          {DATE_FIELDS.map(({ field, label }) => (
+            <div key={field} className="relative">
+              <button
+                onClick={() => setOpenCalendar(openCalendar === field ? null : field)}
+                className={`flex items-center gap-1 text-[10px] px-[10px] py-[3px] rounded-[130px] border border-[var(--ink)] uppercase tracking-[0.04em] font-medium whitespace-nowrap leading-none transition-colors ${
+                  isActive(field)
+                    ? 'bg-[var(--ink)] text-[var(--card)]'
+                    : 'bg-[var(--card)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--card)]'
+                }`}
+              >
+                {label}
+                <ChevronDown
+                  size={9}
+                  strokeWidth={2.5}
+                  className={`transition-transform ${openCalendar === field ? 'rotate-180' : ''}`}
+                />
+              </button>
+
+              {openCalendar === field && (
+                <div className="absolute top-full left-0 mt-1 z-50">
+                  <MiniCalendar
+                    startDate={dateFilters[field].start}
+                    endDate={dateFilters[field].end}
+                    onChange={(start, end) => {
+                      onDateFilter(field, start, end)
+                      if (start && end) setOpenCalendar(null)
+                    }}
+                    onClose={() => setOpenCalendar(null)}
+                  />
+                </div>
+              )}
+            </div>
           ))}
         </div>
 
