@@ -23,6 +23,9 @@ export function AddContactModal({ onClose, onAdd }: Props) {
     linkedin: '', website: '', instagram: '', summary: '',
   })
   const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const [customTags, setCustomTags] = useState<string[]>([])
+  const [newTagInput, setNewTagInput] = useState('')
+  const [showTagInput, setShowTagInput] = useState(false)
   const [urlPull, setUrlPull] = useState('')
   const [pulling, setPulling] = useState(false)
 
@@ -200,7 +203,7 @@ export function AddContactModal({ onClose, onAdd }: Props) {
                 Tags {selectedTags.length > 0 && <span className="opacity-50">({selectedTags.length}/{MAX_TAGS})</span>}
               </ModalLabel>
               <div className="flex flex-wrap gap-1.5 mt-1">
-                {TAG_OPTIONS.map(tag => (
+                {[...TAG_OPTIONS, ...customTags].map(tag => (
                   <button
                     key={tag}
                     onClick={() => toggleTag(tag)}
@@ -214,6 +217,39 @@ export function AddContactModal({ onClose, onAdd }: Props) {
                     {tag}
                   </button>
                 ))}
+
+                {/* Create tag */}
+                {showTagInput ? (
+                  <form
+                    onSubmit={e => {
+                      e.preventDefault()
+                      const val = newTagInput.trim()
+                      if (val && !TAG_OPTIONS.includes(val) && !customTags.includes(val)) {
+                        setCustomTags(t => [...t, val])
+                        if (selectedTags.length < MAX_TAGS) setSelectedTags(t => [...t, val])
+                      }
+                      setNewTagInput('')
+                      setShowTagInput(false)
+                    }}
+                    className="flex items-center gap-1"
+                  >
+                    <input
+                      autoFocus
+                      value={newTagInput}
+                      onChange={e => setNewTagInput(e.target.value)}
+                      onBlur={() => { if (!newTagInput.trim()) setShowTagInput(false) }}
+                      placeholder="Tag name..."
+                      className="text-[9px] px-2.5 py-1 rounded-full border border-[var(--ink)] uppercase tracking-[0.05em] font-medium bg-transparent focus:outline-none w-24 placeholder:opacity-40"
+                    />
+                  </form>
+                ) : (
+                  <button
+                    onClick={() => setShowTagInput(true)}
+                    className="text-[9px] px-2.5 py-1 rounded-full border border-dashed border-[var(--ink)] uppercase tracking-[0.05em] font-medium text-[var(--ink)] opacity-50 hover:opacity-100 transition-opacity"
+                  >
+                    Create tag +
+                  </button>
+                )}
               </div>
             </div>
 

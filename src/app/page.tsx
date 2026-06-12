@@ -41,6 +41,12 @@ export default function Home() {
     setDateFilters(f => ({ ...f, [field]: { start, end } }))
   }
 
+  const handleClearAll = () => {
+    setSearch('')
+    setActiveTagFilters([])
+    setDateFilters(emptyDateFilters)
+  }
+
   const filtered = useMemo(() => {
     let list = contacts.filter(c => {
       const matchSearch = !search ||
@@ -57,9 +63,8 @@ export default function Home() {
       return matchSearch && matchTags && matchDates
     })
     list = [...list].sort((a, b) => {
-      const av = (a[sortBy] ?? '1900-01-01') as string
-      const bv = (b[sortBy] ?? '1900-01-01') as string
-      return bv > av ? 1 : -1
+      const lastName = (name: string) => name.trim().split(' ').pop()?.toLowerCase() ?? ''
+      return lastName(a.name) < lastName(b.name) ? -1 : lastName(a.name) > lastName(b.name) ? 1 : 0
     })
     return list
   }, [contacts, search, sortBy, activeTagFilters, dateFilters])
@@ -184,6 +189,7 @@ export default function Home() {
             onAddContact={() => setShowAddModal(true)}
             dateFilters={dateFilters}
             onDateFilter={handleDateFilter}
+            onClearAll={handleClearAll}
           />
         </div>
       </div>
