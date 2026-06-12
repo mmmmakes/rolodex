@@ -88,7 +88,7 @@ export function FilterPanel({
 
       {/* Date filter pills */}
       <div className="flex flex-wrap gap-1.5">
-        {DATE_FIELDS.map(({ field, label }) => (
+        {DATE_FIELDS.map(({ field, label }, idx) => (
           <div key={field} className="relative">
             <button
               onClick={() => setOpenCalendar(openCalendar === field ? null : field)}
@@ -107,7 +107,7 @@ export function FilterPanel({
             </button>
 
             {openCalendar === field && (
-              <div className="absolute top-full left-0 mt-1 z-50">
+              <div className={`absolute top-full mt-1 z-50 ${idx >= 2 ? 'right-0' : 'left-0'}`}>
                 <MiniCalendar
                   startDate={dateFilters[field].start}
                   endDate={dateFilters[field].end}
